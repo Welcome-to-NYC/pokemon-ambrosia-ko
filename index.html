@@ -1,0 +1,1411 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="포켓몬스터 암브로시아 한글판 공략 위키와 한글 패치"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>암브로시아 한글 위키</title>
+<style>
+@font-face { font-family: "Galmuri9"; src: url("galmuri9.woff2") format("woff2"); font-display: swap; }
+:root {
+  --bg: #f5efe3; --surface: #fffcf5; --surface2: #f0e8d8; --ink: #2a241c; --muted: #6e6455;
+  --line: #e2d7c3; --accent: #a8432a; --accent-ink: #fff; --gold: #c99a1c; --link: #8a3520;
+  --good: #3f8f4f; --bad: #b8432f; --shadow: 0 1px 0 rgba(60,40,10,.06), 0 6px 18px -10px rgba(60,40,10,.25);
+  --pixel: "Galmuri9", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16130e; --surface: #201c15; --surface2: #2a251c; --ink: #efe7d6; --muted: #a89d8a;
+    --line: #3a3326; --accent: #e07a52; --accent-ink: #1b140c; --gold: #e3b43c; --link: #f0a07c;
+    --good: #6cc07a; --bad: #ef7a62; --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 20px -12px rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16130e; --surface: #201c15; --surface2: #2a251c; --ink: #efe7d6; --muted: #a89d8a;
+  --line: #3a3326; --accent: #e07a52; --accent-ink: #1b140c; --gold: #e3b43c; --link: #f0a07c;
+  --good: #6cc07a; --bad: #ef7a62; --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 20px -12px rgba(0,0,0,.6);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.6 var(--sans); }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1, h2, h3, .px { font-family: var(--pixel); font-weight: normal; letter-spacing: 0; }
+h1 { font-size: 26px; line-height: 1.3; margin: 0; }
+h2 { font-size: 19px; margin: 28px 0 12px; }
+h3 { font-size: 16px; margin: 0 0 8px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+/* header */
+header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.topbar { display: flex; align-items: center; gap: 14px; height: 56px; }
+.brand { display: flex; align-items: center; gap: 8px; color: var(--ink); font-family: var(--pixel); font-size: 17px; white-space: nowrap; }
+.brand:hover { text-decoration: none; }
+.brand .ball { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(var(--accent) 0 46%, var(--ink) 46% 54%, var(--surface) 54%); border: 2px solid var(--ink); position: relative; }
+.brand .ball::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--surface); border: 2px solid var(--ink); }
+nav.main { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+nav.main::-webkit-scrollbar { display: none; }
+nav.main a { padding: 6px 10px; border-radius: 8px; color: var(--muted); white-space: nowrap; font-size: 14px; }
+nav.main a:hover { background: var(--surface2); color: var(--ink); text-decoration: none; }
+nav.main a.on { background: var(--ink); color: var(--bg); }
+.back-btn { flex: none; display: inline-flex; align-items: center; gap: 2px; height: 34px; padding: 0 12px 0 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 8px; cursor: pointer; font: inherit; font-size: 14px; white-space: nowrap; }
+.back-btn:hover { border-color: var(--accent); }
+.back-btn[hidden] { display: none; }
+.back-btn svg { width: 16px; height: 16px; }
+.theme-btn { margin-left: auto; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 8px; width: 34px; height: 34px; cursor: pointer; flex: none; font-size: 15px; }
+:root { --head-h: 57px; }
+nav.main { position: relative; }
+@media (max-width: 640px) {
+  .topbar { height: auto; flex-wrap: wrap; padding: 8px 0 4px; gap: 6px 10px; }
+  /* the tabs scroll sideways edge to edge; the fades show there is more */
+  nav.main { order: 3; flex-basis: calc(100% + 32px); margin: 0 -16px; padding: 0 16px 4px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 30px), transparent);
+    mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 30px), transparent); }
+}
+main.wrap { padding-top: 34px; padding-bottom: 64px; min-height: 70vh; } /* .wrap sets the side padding */
+@media (max-width: 640px) { main.wrap { padding-top: 22px; } }
+#app > h1 { margin: 0 0 14px; }
+/* in-page jumps land below the sticky header, whatever its height */
+[id] { scroll-margin-top: calc(var(--head-h) + 14px); }
+/* keep running text to a readable line length on wide screens */
+.wsteps p, .wchap > p, .faq details p, section.card > p, .wtips li { max-width: 72ch; }
+footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; padding: 20px 0 40px; }
+
+/* blocks */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); }
+.pad { padding: 18px; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.grid { display: grid; gap: 12px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 1px 9px; border-radius: 999px; font-size: 12px; line-height: 20px; border: 1px solid var(--line); background: var(--surface2); color: var(--ink); white-space: nowrap; }
+.tag { display: inline-block; font-size: 12px; padding: 0 7px; border-radius: 6px; background: var(--surface2); color: var(--muted); line-height: 20px; }
+.tag.gold { background: color-mix(in srgb, var(--gold) 22%, transparent); color: var(--ink); }
+.type { display: inline-block; min-width: 46px; text-align: center; padding: 0 8px; border-radius: 6px; font-size: 12px; line-height: 21px; color: #fff; font-weight: 600; text-shadow: 0 1px 0 rgba(0,0,0,.25); white-space: nowrap; }
+.type.lg { font-size: 14px; line-height: 26px; min-width: 60px; padding: 0 12px; }
+.t-NORMAL{background:#9b9a78}.t-FIGHTING{background:#b9442f}.t-FLYING{background:#8b8fdb}.t-POISON{background:#9a4aa1}
+.t-GROUND{background:#c49a45}.t-ROCK{background:#a68e3a}.t-FAIRY{background:#d77aa6}.t-BUG{background:#8b9e26}
+.t-GHOST{background:#695a9c}.t-STEEL{background:#8a92a6}.t-FIRE{background:#e2702c}.t-WATER{background:#4c83d6}
+.t-GRASS{background:#55a345}.t-ELECTRIC{background:#e0b11a;color:#2a2000;text-shadow:none}.t-PSYCHIC_TYPE{background:#e0527b}
+.t-ICE{background:#63c2c2;color:#062a2a;text-shadow:none}.t-DRAGON{background:#5944d4}.t-DARK{background:#5a4a3d}
+.t-UBER{background:linear-gradient(135deg,#c4921c,#8a2fc2)}
+.cat { font-size: 12px; padding: 0 7px; border-radius: 6px; line-height: 21px; display: inline-block; border: 1px solid var(--line); }
+.cat-물리 { background: color-mix(in srgb, #e2702c 18%, transparent); }
+.cat-특수 { background: color-mix(in srgb, #4c83d6 18%, transparent); }
+.cat-변화 { background: color-mix(in srgb, #9b9a78 22%, transparent); }
+
+/* sprite */
+.spr { display: inline-block; background-repeat: no-repeat; image-rendering: pixelated; image-rendering: crisp-edges; flex: none; }
+
+/* forms */
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 14px; }
+input[type=search], select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 7px 12px; min-width: 0; }
+input[type=search] { flex: 1 1 220px; }
+input[type=search]:focus, select:focus { outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 1px; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button, .typebtn { font: inherit; font-size: 13px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 3px 12px; }
+.seg button.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.typebtn { padding: 0; border: 2px solid transparent; border-radius: 8px; background: none; opacity: .45; }
+.typebtn.on { opacity: 1; border-color: var(--ink); }
+.typebtn .type { display: block; }
+.count { color: var(--muted); font-size: 13px; margin-left: auto; }
+
+/* dex grid */
+.dex { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 10px; }
+.mon { display: flex; flex-direction: column; align-items: center; padding: 10px 8px 12px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); transition: transform .12s, border-color .12s; }
+.mon:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+.mon .no { font-family: var(--pixel); color: var(--muted); font-size: 12px; align-self: flex-start; }
+.mon .nm { font-family: var(--pixel); font-size: 15px; margin: 2px 0 6px; text-align: center; }
+.mon .ts { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+.mon .ts .type { min-width: 0; font-size: 11px; line-height: 18px; padding: 0 6px; }
+
+/* tables */
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; white-space: nowrap; }
+th { font-weight: 600; color: var(--muted); font-size: 12px; background: var(--surface2); position: sticky; top: 0; }
+tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.wrapc { white-space: normal; min-width: 220px; color: var(--muted); font-size: 13px; }
+tbody tr.click { cursor: pointer; }
+tbody tr.click:hover td { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.monlink { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); }
+
+/* detail */
+.hero { display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; }
+.hero .art { width: 168px; height: 168px; border-radius: 18px; display: grid; place-items: center; background: radial-gradient(circle at 50% 60%, var(--surface2), transparent 70%); position: relative; }
+.hero .art .spr { transition: opacity .15s; }
+.shiny-btn { position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); font: inherit; font-size: 12px; cursor: pointer; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); padding: 2px 10px; white-space: nowrap; }
+.shiny-btn.on { background: var(--gold); color: #241a00; border-color: var(--gold); }
+.hero .no { font-family: var(--pixel); color: var(--muted); }
+.hero h1 { font-size: 32px; }
+.hero .en { color: var(--muted); margin-left: 6px; font-size: 15px; }
+@media (max-width: 560px) { .hero { grid-template-columns: 1fr; justify-items: center; text-align: center; } .hero .meta-row { justify-content: center; } }
+.meta-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 820px) { .cols { grid-template-columns: 1fr; } }
+.ability { border-left: 4px solid var(--gold); background: color-mix(in srgb, var(--gold) 10%, var(--surface)); }
+.ability .lbl { font-family: var(--pixel); font-size: 13px; color: var(--muted); }
+.ability p { margin: 4px 0 0; font-size: 16px; }
+.stat { display: grid; grid-template-columns: 64px 36px 1fr; gap: 8px; align-items: center; font-size: 13px; padding: 3px 0; }
+.stat .v { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.bar { height: 10px; border-radius: 6px; background: var(--surface2); overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: 6px; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; font-size: 14px; margin: 0; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; }
+.eff { display: grid; grid-template-columns: 54px 1fr; gap: 8px; align-items: start; padding: 5px 0; border-bottom: 1px dashed var(--line); }
+.eff:last-child { border-bottom: 0; }
+.eff b { font-family: var(--pixel); font-weight: normal; font-size: 14px; }
+.eff .list { display: flex; flex-wrap: wrap; gap: 4px; }
+.evo { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 4px; }
+.evo-node { display: flex; flex-direction: column; align-items: center; padding: 6px 8px; border-radius: 12px; color: var(--ink); min-width: 80px; }
+.evo-node.cur { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.evo-node span.n { font-family: var(--pixel); font-size: 13px; }
+.evo-arrow { display: flex; flex-direction: column; align-items: center; color: var(--muted); font-size: 12px; min-width: 70px; text-align: center; }
+.evo-arrow::before { content: "→"; font-size: 18px; line-height: 1; color: var(--accent); }
+.evo-branch { display: flex; flex-direction: column; gap: 4px; }
+.evo-branch > div { display: flex; align-items: center; gap: 4px; }
+.pager { display: flex; justify-content: space-between; gap: 10px; margin: 0 0 14px; }
+.pager a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; }
+
+/* home */
+.welcome { display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px; align-items: stretch; }
+@media (max-width: 820px) { .welcome { grid-template-columns: 1fr; } }
+.welcome > *, .cols > * { min-width: 0; }
+.welcome .intro { padding: 26px; background: linear-gradient(160deg, color-mix(in srgb, var(--gold) 18%, var(--surface)), var(--surface) 60%); }
+.welcome .intro h1 { font-size: 30px; margin-bottom: 10px; }
+.welcome .intro p { margin: 0 0 10px; }
+.parade { display: flex; gap: 0; margin: 14px -4px 0; overflow: hidden; height: 64px; }
+.steps { counter-reset: s; list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; gap: 10px; }
+.steps li::before { content: counter(s); font-family: var(--pixel); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--ink); color: var(--bg); }
+.steps b { display: block; }
+.steps span { color: var(--muted); font-size: 14px; }
+.quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+.quick a { display: block; padding: 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); box-shadow: var(--shadow); }
+.quick a:hover { border-color: var(--accent); text-decoration: none; }
+.quick a b { font-family: var(--pixel); font-weight: normal; font-size: 16px; display: block; }
+.quick a span { color: var(--muted); font-size: 13px; }
+.features { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.features ul { margin: 0; padding-left: 18px; }
+.features li { margin: 4px 0; font-size: 14px; }
+.results { display: grid; gap: 4px; margin-top: 10px; }
+.results a { display: flex; align-items: center; gap: 10px; padding: 6px 10px; border-radius: 10px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); }
+.results a:hover { border-color: var(--accent); text-decoration: none; }
+.results .kind { font-size: 12px; color: var(--muted); margin-left: auto; }
+
+/* trainers & places */
+.trainers { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; }
+@media (max-width: 380px) { .trainers { grid-template-columns: 1fr; } }
+.tr-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.tr-head b { font-family: var(--pixel); font-weight: normal; font-size: 17px; }
+.team { display: grid; gap: 6px; margin-top: 10px; }
+.team-mon { display: grid; grid-template-columns: 44px 1fr; gap: 8px; align-items: center; padding: 4px 6px; border-radius: 10px; background: var(--surface2); }
+.team-mon .moves { font-size: 12px; color: var(--muted); line-height: 1.45; }
+.team-mon .top { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; font-size: 14px; }
+.team-mon .top a { color: var(--ink); font-weight: 600; }
+.places { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.place-sub { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+.place-sub:last-child { border-bottom: 0; }
+.mini-mons { display: flex; flex-wrap: wrap; gap: 0; margin-top: 8px; }
+
+/* type chart */
+.chart { width: auto; }
+.chart td, .chart th { padding: 0; text-align: center; border: 1px solid var(--line); }
+.chart th { position: sticky; background: var(--surface2); }
+.chart thead th { top: 0; z-index: 2; height: 74px; vertical-align: bottom; padding-bottom: 4px; }
+.chart thead th .type { writing-mode: vertical-rl; min-width: 0; padding: 6px 0; width: 22px; line-height: 22px; }
+.chart tbody th { left: 0; z-index: 1; padding: 2px 4px; text-align: right; }
+.chart td { width: 32px; height: 30px; font-weight: 700; font-size: 13px; }
+.chart td.x2 { background: color-mix(in srgb, var(--good) 30%, transparent); }
+.chart td.x05 { background: color-mix(in srgb, var(--bad) 22%, transparent); }
+.chart td.x0 { background: var(--ink); color: var(--bg); }
+.chart td.xn { background: color-mix(in srgb, var(--gold) 16%, transparent); color: var(--muted); font-weight: 400; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--muted); margin: 10px 0; }
+.legend i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 4px; }
+.notes { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+.empty { padding: 30px; text-align: center; color: var(--muted); }
+.loading { display: grid; place-items: center; min-height: 50vh; color: var(--muted); font-family: var(--pixel); }
+details summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+.stage { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; line-height: 20px; padding: 0 8px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--ink); white-space: nowrap; }
+.stage b { font-weight: 700; color: var(--accent); }
+.patch { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; }
+.patch-btn { display: inline-block; font-weight: 600; padding: 7px 14px; border-radius: 8px; background: var(--ink); color: var(--bg); text-decoration: none; }
+.patch-btn:hover { color: var(--bg); opacity: .9; }
+.patch-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.crumb { margin: 0 0 2px; font-size: 13px; }
+.crumb a { color: var(--muted); }
+.toc { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; }
+.toc a { font-size: 13px; padding: 3px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.faq details { border-bottom: 1px solid var(--line); padding: 10px 2px; }
+.faq details:last-child { border-bottom: 0; }
+.faq summary { color: var(--ink); font-size: 15px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--muted); font-weight: 400; }
+.faq details[open] summary::after { content: "−"; }
+.faq p { margin: 8px 0 2px; color: var(--muted); font-size: 14px; }
+.gyms { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+@media (max-width: 380px) { .gyms, .picks, .teamgrid { grid-template-columns: 1fr !important; } }
+.gym h3 { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.gym .row { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin: 6px 0; font-size: 13px; }
+.gym .row > span:first-child { color: var(--muted); min-width: 52px; }
+.gym p { margin: 8px 0 0; font-size: 14px; }
+.picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; }
+.pick { display: grid; grid-template-columns: 64px 1fr; gap: 10px; align-items: start; }
+.pick .nm { font-family: var(--pixel); font-size: 16px; color: var(--ink); }
+.pick p { margin: 4px 0; font-size: 14px; }
+.pick .how { font-size: 13px; color: var(--muted); }
+.team { margin-bottom: 14px; }
+.teamgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; margin-top: 12px; }
+.tm { display: grid; grid-template-columns: 56px 1fr; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 12px; background: var(--surface2); }
+.tm .role { font-size: 12px; color: var(--muted); }
+.tm .nm { font-weight: 600; color: var(--ink); }
+.tm .how { font-size: 13px; }
+.capt td, .capt th { text-align: center; }
+.chg { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 14px; }
+.chg + .chg { margin-top: 10px; }
+.chg .nm { font-family: var(--pixel); font-size: 17px; color: var(--ink); }
+@media (max-width: 480px) {
+  .chg { grid-template-columns: 44px 1fr; gap: 8px; padding: 12px 10px; }
+  .chg > a .spr { zoom: .62; }
+  .st6 { gap: 3px; }
+  .st6 div { padding: 3px 1px; font-size: 11px; letter-spacing: -.02em; }
+  .st6 div span { white-space: nowrap; font-size: 10px; }
+}
+.st6 { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; margin: 8px 0; max-width: 520px; }
+.st6 div { background: var(--surface2); border-radius: 8px; padding: 3px 4px; text-align: center; font-size: 12px; line-height: 1.35; }
+.st6 div b { display: block; font-size: 14px; font-variant-numeric: tabular-nums; }
+.st6 .up { background: color-mix(in srgb, var(--good) 22%, transparent); }
+.st6 .dn { background: color-mix(in srgb, var(--bad) 18%, transparent); }
+.st6 i { font-style: normal; font-size: 11px; color: var(--muted); }
+.st6 .up i { color: var(--good); } .st6 .dn i { color: var(--bad); }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chips .chip { font-size: 12px; }
+.chip.new { background: color-mix(in srgb, var(--good) 14%, var(--surface)); }
+.chip.own { background: color-mix(in srgb, var(--gold) 26%, var(--surface)); }
+.lbl2 { font-size: 12px; color: var(--muted); margin: 8px 0 3px; }
+.strike { text-decoration: line-through; opacity: .55; }
+.wchap { padding: 18px; margin-bottom: 14px; }
+.wchap h2 { margin: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.wchap h2 .num { font-size: 13px; color: var(--accent); }
+.wsteps { list-style: none; margin: 14px 0 0; padding: 0; counter-reset: w; }
+.wsteps > li { counter-increment: w; position: relative; padding: 0 0 14px 38px; }
+.wsteps > li::before { content: counter(w); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-family: var(--pixel); font-size: 13px; background: var(--surface2); color: var(--ink); border: 1px solid var(--line); }
+.wsteps > li::after { content: ""; position: absolute; left: 13px; top: 28px; bottom: 2px; border-left: 1px dashed var(--line); }
+.wsteps > li:last-child::after { display: none; }
+.wsteps p { margin: 2px 0 6px; }
+.wbits { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.wbattle { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 4px 10px; border-radius: 10px; background: var(--surface2); font-size: 13px; color: var(--ink); }
+.wbattle:hover { text-decoration: none; outline: 1px solid var(--accent); }
+.wbattle .mm { display: flex; }
+.wtips { margin: 4px 0 0; padding: 10px 14px; border-radius: 10px; background: color-mix(in srgb, var(--gold) 12%, transparent); font-size: 14px; }
+.wtips ul { margin: 0; padding-left: 18px; }
+.wtoggle { display: inline-flex; align-items: center; gap: 8px; margin: 6px 0 2px; font-size: 14px; cursor: pointer; user-select: none; }
+.wtoggle input { width: 16px; height: 16px; accent-color: var(--accent); }
+.walk-hide-mons .wmons { display: none; }
+.wmons { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--good) 35%, var(--line)); background: color-mix(in srgb, var(--good) 7%, var(--surface)); }
+.wmons-h { font-family: var(--pixel); font-size: 14px; margin-bottom: 6px; }
+.wmons-h .muted { white-space: nowrap; }
+.tocd { margin: 8px 0 4px; }
+.tocd > summary { cursor: pointer; font-size: 14px; color: var(--ink); padding: 4px 0; list-style-position: inside; }
+.tocd[open] > summary { margin-bottom: 2px; }
+.wm-row { display: grid; grid-template-columns: 112px 1fr; gap: 4px 10px; padding: 5px 0; border-top: 1px dashed var(--line); }
+.wmons-h + .wm-row { border-top: 0; }
+.wm-place { font-size: 13px; color: var(--muted); padding-top: 2px; }
+.wm-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.wm-chips .chip { padding-left: 3px; }
+.wm-chips .chip i { font-style: normal; font-size: 11px; color: var(--muted); }
+.wm-sub { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+@media (max-width: 560px) { .wm-row { grid-template-columns: 1fr; gap: 2px; } }
+/* page and section explanations behind an (i) button */
+.itip { display: inline-flex; vertical-align: middle; margin-left: 8px; }
+.itip-btn { width: 20px; height: 20px; padding: 0; border-radius: 50%; border: 1.5px solid var(--muted); background: transparent; color: var(--muted); font: italic 700 12px/1 Georgia, "Times New Roman", serif; cursor: pointer; display: grid; place-items: center; }
+.itip-btn:hover, .itip.open .itip-btn { color: var(--accent); border-color: var(--accent); }
+.itip-pop { position: fixed; z-index: 55; display: none; width: max-content; max-width: min(340px, calc(100vw - 16px)); padding: 10px 13px; border-radius: 10px; background: var(--ink); color: var(--bg); font: 400 13px/1.65 var(--sans); letter-spacing: 0; text-align: left; white-space: normal; box-shadow: 0 10px 30px -12px rgba(0,0,0,.5); }
+.itip.open .itip-pop { display: block; }
+.itip-pop b { font-weight: 700; }
+/* hover cards */
+.icards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 6px; }
+.icard { display: flex; flex-direction: column; gap: 6px; padding: 16px; color: var(--ink); min-height: 116px; transition: transform .12s, border-color .12s; }
+.icard:hover { text-decoration: none; border-color: var(--accent); transform: translateY(-2px); }
+.icard-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.icard-top b { font-family: var(--pixel); font-weight: normal; font-size: 16px; }
+.icard-mons { display: flex; gap: 2px; margin-top: auto; }
+.icard-extra { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; padding-top: 4px; }
+.icard-extra .chip .type { min-width: 0; font-size: 10px; line-height: 16px; padding: 0 5px; }
+.swatches { display: flex; gap: 4px; }
+@media (max-width: 560px) {
+  .icards { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .icard { padding: 11px; min-height: 0; gap: 4px; }
+  .icard-top { flex-direction: column; align-items: flex-start; gap: 3px; }
+  .icard-top b { font-size: 14px; line-height: 1.3; }
+  .icard .muted.small { font-size: 12px; line-height: 1.4; }
+  .icard-mons .spr { zoom: .8; }
+  .icard-extra .chip:nth-child(n+3) { display: none; }
+  .swatches { gap: 2px; flex-wrap: wrap; }
+  .swatches i { width: 12px; height: 12px; }
+}
+.swatches i { width: 16px; height: 16px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--ink) 25%, transparent); }
+.toc a.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.tip { position: fixed; z-index: 60; width: 300px; max-width: calc(100vw - 16px); padding: 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 10px 30px -10px rgba(0,0,0,.45); font-size: 13px; line-height: 1.5; pointer-events: none; display: none; }
+.tip.on { display: block; }
+.tip-h { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; }
+.tip-h b { font-family: var(--pixel); font-weight: normal; font-size: 15px; }
+.tip-l { font-size: 11px; color: var(--muted); margin: 8px 0 2px; }
+.tip .st6 { margin: 4px 0 0; gap: 3px; }
+.tip .st6 div { padding: 3px 1px; }
+.tip .st6 div span { white-space: nowrap; font-size: 10px; letter-spacing: -.02em; }
+.tip .chips { display: flex; flex-wrap: wrap; gap: 3px; }
+.tip .chip { font-size: 11px; line-height: 18px; padding: 0 7px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap topbar">
+    <button class="back-btn" id="back" hidden aria-label="이전 페이지로"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg>뒤로</button>
+    <a class="brand" href="#/"><span class="ball"></span>암브로시아 위키</a>
+    <nav class="main" id="nav">
+      <a href="#/start" data-r="start">처음 시작</a>
+      <a href="#/walk" data-r="walk">공략</a>
+      <a href="#/dex" data-r="dex">도감</a>
+      <a href="#/places" data-r="places">지역</a>
+      <a href="#/train" data-r="train">육성</a>
+      <a href="#/changes" data-r="changes">바뀐 점</a>
+      <a href="#/info" data-r="info">자료실</a>
+    </nav>
+    <button class="theme-btn" id="theme" title="밝게/어둡게" aria-label="밝게/어둡게 전환">◐</button>
+  </div>
+</header>
+<main class="wrap" id="app"><div class="loading">불러오는 중…</div></main>
+<footer>
+  <div class="wrap">
+    포켓몬스터 암브로시아 v3.0.0 한글판 팬 위키. 모든 수치는 게임 소스에서 자동으로 뽑았습니다.
+    포켓몬과 관련 이름·그림의 권리는 Nintendo · Creatures · GAME FREAK에 있습니다. 글꼴: 갈무리(SIL OFL 1.1).
+  </div>
+</footer>
+<script>
+(() => {
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const app = $('#app');
+let D, SP, G, AV, CMP, CMV = {}, W, WM, P = {}, M = {}, I = {}, T = {}, PL = {}, TY = {}, EFF = {}, LEARN = {}, PLACE_LIST = [];
+
+// theme
+const root = document.documentElement;
+try { const t = localStorage.getItem('amb-theme'); if (t) root.dataset.theme = t; } catch (e) {}
+const header = $('header.top');
+const setHeadH = () => root.style.setProperty('--head-h', header.offsetHeight + 'px');
+setHeadH();
+addEventListener('resize', setHeadH);
+$('#theme').onclick = () => {
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('amb-theme', root.dataset.theme); } catch (e) {}
+};
+
+// ---------- helpers ----------
+function spr(key, z = 1, shiny = false) {
+  const i = SP.index[key];
+  if (i == null) return `<span class="spr" style="width:${56*z}px;height:${56*z}px"></span>`;
+  const c = SP.cell * z, col = i % SP.cols, row = Math.floor(i / SP.cols);
+  return `<span class="spr" style="width:${c}px;height:${c}px;background-image:url(${shiny ? 'sprites_shiny.png' : 'sprites.png'}?v=2);background-size:${SP.cols * c}px auto;background-position:${-col * c}px ${-row * c}px"></span>`;
+}
+const typeChip = (t, lg) => `<span class="type t-${t}${lg ? ' lg' : ''}">${esc(TY[t]?.ko ?? t)}</span>`;
+const catChip = c => `<span class="cat cat-${c}">${esc(c)}</span>`;
+const monLink = (key, z = .64) => { const p = P[key]; return p ? `<a class="monlink" href="#/p/${key}">${spr(key, z)}<span>${esc(p.ko)}</span></a>` : esc(key); };
+const moveLink = k => M[k] ? `<a href="#/move/${k}">${esc(M[k].ko)}</a>` : esc(k);
+const placeLink = (k, label) => PL[k] ? `<a href="#/place/${k}">${esc(label || PL[k].ko)}</a>` : esc(label || k);
+const no3 = n => String(n).padStart(3, '0');
+const norm = s => String(s || '').toLowerCase().replace(/[\s·.'’\-]/g, '');
+const dash = v => (v == null || v === 0) ? '—' : v;
+function statColor(v) { return v >= 120 ? '#3f9a5a' : v >= 90 ? '#7fae3a' : v >= 60 ? '#d6a627' : v >= 40 ? '#e0832f' : '#d0533a'; }
+function setTitle(t) { document.title = t ? `${t} · 암브로시아 위키` : '암브로시아 한글 위키'; }
+function defMult(atk, defs) { let m = 1; for (const d of defs) m *= (EFF[atk]?.[d] ?? 1); return atk === 'UBER' ? 1 : m; }
+
+// ---------- views ----------
+function viewHome() {
+  setTitle('');
+  const parade = ['TREECKO','CHIMCHAR','PIPLUP','PIKACHU','EEVEE','LUCARIO','GARCHOMP','GENGAR','DRAGONITE','TYRANITAR','MEW','RAYQUAZA','ARCEUS','MEWTWO','ABSOL','GARDEVOIR'].filter(k => P[k]);
+  const c = D.meta.counts;
+  return `
+  <section class="welcome">
+    <div class="card intro">
+      <div class="px muted small">Pokémon Ambrosia v${esc(D.meta.version)} · 한글판</div>
+      <h1>포켓몬스터 암브로시아<br>한글 위키</h1>
+      <p>크리스탈을 바탕으로 완전히 새로 만든 롬핵 「암브로시아」의 한글판 공략 사전입니다. 호연과의 전쟁이 다가오는 성도·관동을 무대로, 1~6세대 포켓몬 ${c.pokemon}종과 새 타입 <span class="type t-UBER">우버</span>, 모든 포켓몬의 특성이 등장합니다.</p>
+      <p class="muted small">이름은 공식 한국어명을 따랐고, 모든 수치는 게임 소스에서 직접 뽑았습니다.</p>
+      <div class="parade">${parade.map(k => `<a href="#/p/${k}" title="${esc(P[k].ko)}">${spr(k, 1.1)}</a>`).join('')}</div>
+    </div>
+    <div class="card pad">
+      <h3>처음이라면</h3>
+      <ol class="steps">
+        <li><div><b>원본 롬에 한글 패치 적용</b><span>「Pokémon Ambrosia (v3.0.0).gbc」에 .bps 패치를 Flips나 Rom Patcher JS로 적용합니다. 게임보이 컬러 전용이며 새 게임으로 시작하세요.</span>
+          <span class="patch"><a class="patch-btn" href="${PATCH_URL}" target="_blank" rel="noopener">한글 패치 받기</a><span class="muted small">GitHub · zip 1.5MB · BPS·IPS 패치, Delta 스킨, 설명서</span></span></div></li>
+        <li><div><b>처음 시작 가이드 읽기</b><span><a href="#/start">처음 시작 가이드</a>에 레벨 제한, 체육관 공략, 언제 어디서 잡는지까지 따진 추천 파티가 있습니다.</span></div></li>
+        <li><div><b>막히면 여기서 찾기</b><span>아래 검색창에 포켓몬·기술·도구·장소·트레이너 이름을 넣어 보세요. 한글·영어 모두 됩니다.</span></div></li>
+      </ol>
+    </div>
+  </section>
+  <h2>찾아보기</h2>
+  <input type="search" id="q" placeholder="예: 나무지기, 지진, 마스터볼, 금빛시티, 비상" autocomplete="off" style="width:100%">
+  <div class="results" id="res"></div>
+  <h2>둘러보기</h2>
+  <div class="quick">
+    <a href="#/start"><b>처음 시작 가이드</b><span>자주 묻는 질문 · 체육관 공략 · 추천 파티</span></a>
+    <a href="#/walk"><b>공략</b><span>스토리 순서대로 따라가기</span></a>
+    <a href="#/dex"><b>포켓몬 도감</b><span>${c.pokemon}종 · 특성 · 서식지</span></a>
+    <a href="#/places"><b>지역</b><span>${c.places}곳 · 야생 포켓몬</span></a>
+    <a href="#/train"><b>육성 가이드</b><span>개체값 · 노력치 · 특성 · 이로치</span></a>
+    <a href="#/changes"><b>바뀐 점</b><span>게임 시스템 · 종족값 · 타입 · 기술</span></a>
+    <a href="#/info"><b>자료실</b><span>기술 · 도구 · 트레이너 · 상성표 · 진화 방법 · 상점</span></a>
+  </div>
+  <h2>암브로시아는 무엇이 다른가요?</h2>
+  <div class="features">${D.features.slice(0, 4).map(featureCard).join('')}</div>
+  <p><a href="#/changes">바뀐 점 전체 보기 →</a></p>`;
+}
+// The patch lives in the wiki's GitHub repository; this name stays the same across releases.
+const REPO_URL = 'https://github.com/Welcome-to-NYC/pokemon-ambrosia-ko';
+const PATCH_URL = REPO_URL + '/releases/latest/download/Pokemon_Ambrosia_v3.0.0_KO_patch.zip';
+const crumb = () => '<p class="crumb"><a href="#/info">자료실</a> ›</p>';
+const featureCard = f => `<div class="card pad"><h3>${esc(f.title)}</h3><ul>${f.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>`;
+function bindHome() {
+  const q = $('#q'), res = $('#res');
+  const idx = [
+    ...D.pokemon.map(p => ({ k: 'p', key: p.key, ko: p.ko, en: p.en, kind: '포켓몬' })),
+    ...D.moves.map(m => ({ k: 'move', key: m.key, ko: m.ko, en: m.en, kind: '기술' })),
+    ...D.items.map(i => ({ k: 'item', key: i.key, ko: i.ko, en: i.en, kind: '도구' })),
+    ...PLACE_LIST.map(p => ({ k: 'place', key: p.key, ko: p.ko, en: p.en, kind: '장소' })),
+    ...D.trainers.map(t => ({ k: 'trainer', key: t.key, ko: `${t.class_ko} ${t.name}`, en: `${t.class_en} ${t.name_en}`, kind: t.role || '트레이너' })),
+  ].map(r => ({ ...r, n: norm(r.ko) + '|' + norm(r.en) }));
+  q.oninput = () => {
+    const s = norm(q.value);
+    if (!s) { res.innerHTML = ''; return; }
+    const hits = idx.filter(r => r.n.includes(s)).sort((a, b) => (norm(a.ko).startsWith(s) ? 0 : 1) - (norm(b.ko).startsWith(s) ? 0 : 1)).slice(0, 24);
+    res.innerHTML = hits.length ? hits.map(r => {
+      const href = r.k === 'item' ? `#/items?q=${encodeURIComponent(r.ko)}` : `#/${r.k}/${encodeURIComponent(r.key)}`;
+      const icon = r.k === 'p' ? spr(r.key, .6) : r.k === 'move' ? typeChip(M[r.key].type) : '';
+      return `<a href="${href}">${icon}<span>${esc(r.ko)} <span class="muted small">${esc(r.en)}</span></span><span class="kind">${esc(r.kind)}</span></a>`;
+    }).join('') : '<div class="empty">찾는 결과가 없습니다.</div>';
+  };
+  q.focus({ preventScroll: true });
+}
+
+// dex
+const dexState = { q: '', types: new Set(), sort: 'dex', stage: '', view: 'grid' };
+try { if (localStorage.getItem('amb-dex-view') === 'detail') dexState.view = 'detail'; } catch (e) {}
+// one Pokémon in the dex's detailed view: the 바뀐 점 card plus when it can be had
+function dexDetail(p) {
+  const same = !isChanged(p.key);
+  const av = AV.pokemon[p.key];
+  return `<div class="card chg"><a href="#/p/${p.key}">${spr(p.key, 1.25)}</a><div>
+    <div><a class="nm" href="#/p/${p.key}">${esc(p.ko)}</a>${formTag(p.key)} <span class="muted small">${dexState.sort === 'no' ? 'No.' + no3(p.no) : '#' + no3(p.dex_order)} ${esc(p.en)}</span>
+      ${same && CMP[p.key] && !CMP[p.key].custom ? '<span class="tag">종족값·타입 공식과 같음</span>' : ''}</div>
+    ${changeBody(p.key)}
+    ${av ? `<div class="lbl2">얻는 시기</div><div class="small">${stageChip(av.stage)} ${availHow(p.key)}</div>` : ''}
+  </div></div>`;
+}
+function viewDex(params = {}) {
+  if (params.stage != null) dexState.stage = params.stage;
+  setTitle('포켓몬 도감');
+  return `<h1>포켓몬 도감${itip('게임 속 도감과 같은 순서입니다.<br>「자세히」를 고르면 종족값·특성·얻는 시기를 한눈에 볼 수 있고, 포켓몬을 누르면 진화·서식지·배우는 기술까지 나옵니다.')}</h1>
+  <div class="tools">
+    <input type="search" id="dq" placeholder="이름으로 찾기 (한글/영어)" value="${esc(dexState.q)}">
+    <select id="dsort" aria-label="정렬">
+      <option value="dex">새 도감 순</option><option value="no">전국 번호 순</option>
+      <option value="name">이름 순</option><option value="total">종족값 합계 순</option><option value="spe">스피드 순</option>
+    </select>
+    <div class="seg" id="dview"><button data-v="grid" class="${dexState.view === 'grid' ? 'on' : ''}">카드</button><button data-v="detail" class="${dexState.view === 'detail' ? 'on' : ''}">자세히</button></div>
+    <select id="dstage" aria-label="얻을 수 있는 시기"><option value="">얻는 시기: 전부</option>${AV.stages.map((st, i) => `<option value="${i}">${i ? esc(st.name) + '까지 (포획 ' + st.catch + ')' : '시작하자마자 (포획 10)'}</option>`).join('')}</select>
+  </div>
+  <div class="tools seg" id="dtypes">${D.types.map(t => `<button class="typebtn${dexState.types.has(t.id) ? ' on' : ''}" data-t="${t.id}">${typeChip(t.id)}</button>`).join('')}
+    <span class="count" id="dcount"></span></div>
+  <div class="dex" id="dgrid"></div>`;
+}
+function bindDex() {
+  $('#dsort').value = dexState.sort; $('#dstage').value = dexState.stage;
+  $('#dstage').onchange = e => { dexState.stage = e.target.value; draw(); };
+  const draw = () => {
+    const s = norm(dexState.q);
+    let list = D.pokemon.filter(p => (!s || norm(p.ko).includes(s) || norm(p.en).includes(s)) && [...dexState.types].every(t => p.types.includes(t)) && (dexState.stage === '' || (AV.pokemon[p.key]?.stage ?? 99) <= +dexState.stage));
+    const by = { dex: (a, b) => a.dex_order - b.dex_order, no: (a, b) => a.no - b.no, name: (a, b) => a.ko.localeCompare(b.ko, 'ko'), total: (a, b) => b.stats.total - a.stats.total, spe: (a, b) => b.stats.spe - a.stats.spe }[dexState.sort];
+    list = list.slice().sort(by);
+    $('#dcount').textContent = `${list.length}종`;
+    const grid = $('#dgrid');
+    grid.className = dexState.view === 'detail' ? 'dexd' : 'dex';
+    if (dexState.view === 'detail') { grid.innerHTML = list.length ? list.map(dexDetail).join('') : '<div class="empty">조건에 맞는 포켓몬이 없습니다.</div>'; return; }
+    grid.innerHTML = list.length ? list.map(p => `<a class="mon" href="#/p/${p.key}">
+      <span class="no">${dexState.sort === 'no' ? 'No.' + no3(p.no) : '#' + no3(p.dex_order)}</span>${spr(p.key, 1.25)}
+      <span class="nm">${esc(p.ko)}${formTag(p.key)}</span><span class="ts">${p.types.map(t => typeChip(t)).join('')}</span></a>`).join('') : '<div class="empty">조건에 맞는 포켓몬이 없습니다.</div>';
+  };
+  $('#dq').oninput = e => { dexState.q = e.target.value; draw(); };
+  $('#dview').onclick = e => {
+    const b = e.target.closest('button'); if (!b) return;
+    dexState.view = b.dataset.v;
+    try { localStorage.setItem('amb-dex-view', dexState.view); } catch (err) {}
+    document.querySelectorAll('#dview button').forEach(x => x.classList.toggle('on', x === b));
+    draw();
+  };
+  $('#dsort').onchange = e => { dexState.sort = e.target.value; draw(); };
+  $('#dtypes').onclick = e => {
+    const b = e.target.closest('.typebtn'); if (!b) return;
+    const t = b.dataset.t;
+    if (dexState.types.has(t)) dexState.types.delete(t); else { if (dexState.types.size >= 2) dexState.types.clear(); dexState.types.add(t); }
+    document.querySelectorAll('#dtypes .typebtn').forEach(x => x.classList.toggle('on', dexState.types.has(x.dataset.t)));
+    draw();
+  };
+  draw();
+}
+
+// pokemon detail
+function evoTree(key) {
+  let rootKey = key, guard = 0;
+  while (P[rootKey]?.evolves_from?.length && guard++ < 5) rootKey = P[rootKey].evolves_from[0];
+  const node = k => `<a class="evo-node${k === key ? ' cur' : ''}" href="#/p/${k}">${spr(k, 1)}<span class="n">${esc(P[k]?.ko ?? k)}</span></a>`;
+  const build = k => {
+    const evs = (P[k]?.evolutions || []).filter(e => P[e.to]);
+    if (!evs.length) return node(k);
+    const branch = evs.map(e => `<div><span class="evo-arrow">${esc(e.method)}</span>${build(e.to)}</div>`).join('');
+    return evs.length === 1 ? `${node(k)}<span class="evo-arrow">${esc(evs[0].method)}</span>${build(evs[0].to)}` : `${node(k)}<div class="evo-branch">${branch}</div>`;
+  };
+  return (P[rootKey]?.evolutions?.length) ? `<div class="evo">${build(rootKey)}</div>` : '<p class="muted">진화하지 않는 포켓몬입니다.</p>';
+}
+function moveRow(k, first) {
+  const m = M[k]; if (!m) return '';
+  return `<tr class="click" data-href="#/move/${k}">${first}<td><a href="#/move/${k}">${esc(m.ko)}</a></td><td>${typeChip(m.type)}</td><td>${catChip(m.category)}</td>
+    <td class="num">${dash(m.power)}</td><td class="num">${m.accuracy ? m.accuracy : '—'}</td><td class="num">${m.pp}</td></tr>`;
+}
+function viewMon(key) {
+  const p = P[key]; if (!p) return notFound();
+  setTitle(p.ko);
+  const order = D.pokemon.slice().sort((a, b) => a.dex_order - b.dex_order);
+  const i = order.findIndex(x => x.key === key), prev = order[i - 1], next = order[i + 1];
+  const st = p.stats, labels = [['hp', 'HP'], ['atk', '공격'], ['def', '방어'], ['spa', '특수공격'], ['spd', '특수방어'], ['spe', '스피드']];
+  const groups = { 4: [], 2: [], .5: [], .25: [], 0: [] };
+  D.types.forEach(t => { if (t.id === 'UBER') return; const m = defMult(t.id, p.types); if (m in groups) groups[m].push(t.id); });
+  const effRow = (lbl, list) => list.length ? `<div class="eff"><b>${lbl}</b><div class="list">${list.map(t => typeChip(t)).join('')}</div></div>` : '';
+  const lv = p.level_moves.slice().sort((a, b) => a[0] - b[0]);
+  const tms = p.tm_moves.slice().sort((a, b) => a.machine.localeCompare(b.machine));
+  const locs = p.locations || [];
+  return `
+  <div class="pager">${prev ? `<a href="#/p/${prev.key}">← ${spr(prev.key, .5)} ${esc(prev.ko)}</a>` : '<span></span>'}${next ? `<a href="#/p/${next.key}">${esc(next.ko)} ${spr(next.key, .5)} →</a>` : '<span></span>'}</div>
+  <section class="card pad hero">
+    <div class="art" id="art">${spr(key, 2.75)}<button class="shiny-btn" id="shiny">✦ 이로치</button></div>
+    <div>
+      <div class="no">No.${no3(p.no)} · 새 도감 #${no3(p.dex_order)}</div>
+      <h1>${esc(p.ko)}${formTag(key)}<span class="en">${esc(p.en)}</span></h1>
+      <div class="muted">${esc(p.category)} 포켓몬</div>
+      <div class="meta-row">${p.types.map(t => typeChip(t, true)).join('')}
+        ${p.one_time_encounter ? '<span class="tag gold">단 한 번만 만날 수 있음</span>' : ''}
+        ${p.undiscovered_egg_group ? '<span class="tag">알 미발견</span>' : ''}</div>
+      <p style="margin:12px 0 0">${esc(p.dex_page1)}</p>
+    </div>
+  </section>
+  <section class="card pad ability" style="margin-top:14px">
+    <div class="lbl">특성 · 도감 2쪽</div>
+    <p>${esc(p.dex_page2)}</p>
+    <div class="muted small" style="margin-top:4px">${esc(p.dex_page2_en)}</div>
+  </section>
+  ${FORM_NOTES[key] ? `<section class="card pad" style="margin-top:14px"><div class="lbl">모습(폼)</div><p style="margin:4px 0 0">${FORM_NOTES[key]}</p></section>` : ''}
+  <div class="cols" style="margin-top:14px">
+    <section class="card pad">
+      <h3>언제 얻을 수 있나</h3>
+      ${AV.pokemon[key] ? `<div style="margin-bottom:6px">${stageChip(AV.pokemon[key].stage)}</div><div class="small">${availHow(key)}</div>
+      <p class="muted small" style="margin:8px 0 0">가장 빨리 얻는 방법입니다. 다른 곳은 아래 「만나는 곳」을 보세요.</p>` : '<p class="muted">얻는 방법을 찾지 못했습니다.</p>'}
+    </section>
+    <section class="card pad">
+      <h3>공식 게임과 비교</h3>
+      ${changeBody(key, true)}
+    </section>
+  </div>
+  <div class="cols" style="margin-top:14px">
+    <section class="card pad">
+      <h3>종족값</h3>
+      ${labels.map(([k, l]) => `<div class="stat"><span class="muted">${l}</span><span class="v">${st[k]}</span><span class="bar"><i style="width:${Math.min(100, st[k] / 2.2)}%;background:${statColor(st[k])}"></i></span></div>`).join('')}
+      <div class="stat"><span class="muted">합계</span><span class="v">${st.total}</span><span></span></div>
+    </section>
+    <section class="card pad">
+      <h3>기본 정보</h3>
+      <dl class="kv">
+        <dt>포획률</dt><dd>${p.catch_rate} <span class="muted small">/ 255</span></dd>
+        <dt>성비</dt><dd>${esc(p.gender)}</dd>
+        <dt>성장 속도</dt><dd>${esc(p.growth)}</dd>
+        <dt>알 그룹</dt><dd>${esc(p.egg_groups.join(', '))}</dd>
+        <dt>부화 걸음</dt><dd>${p.egg_cycles} 사이클</dd>
+        <dt>키 · 몸무게</dt><dd>${p.height_m} m · ${p.weight_kg} kg <span class="muted small">(게임 표기 ${esc(p.height)}, ${esc(p.weight)})</span></dd>
+        <dt>기초 경험치</dt><dd>${p.base_exp}</dd>
+        <dt>야생 지닌 도구</dt><dd>${p.held_items.length ? p.held_items.map(h => `<a href="#/items?q=${encodeURIComponent(h.ko)}">${esc(h.ko)}</a> <span class="muted small">${esc(h.slot)}</span>`).join('<br>') : '없음'}</dd>
+      </dl>
+    </section>
+  </div>
+  <div class="cols" style="margin-top:14px">
+    <section class="card pad">
+      <h3>받는 피해</h3>
+      ${effRow('×4', groups[4])}${effRow('×2', groups[2])}${effRow('×½', groups[.5])}${effRow('×¼', groups[.25])}${effRow('×0', groups[0])}
+      <p class="muted small" style="margin:8px 0 0">우버 타입 기술은 상성과 관계없이 항상 보통 효과입니다.</p>
+    </section>
+    <section class="card pad">
+      <h3>진화</h3>
+      ${evoTree(key)}
+    </section>
+  </div>
+  <h2>만나는 곳</h2>
+  ${locs.length ? `<div class="tbl-wrap"><table><thead><tr><th>장소</th><th>방법</th><th>시간</th><th class="num">레벨</th><th class="num">확률</th><th>메모</th></tr></thead><tbody>
+    ${locs.map(l => `<tr><td>${placeLink(l.map, l.map_ko)} <span class="muted small">${esc(l.region || '')}</span></td><td>${esc(l.method)}</td><td>${esc(l.time || '—')}</td>
+    <td class="num">${l.min == null ? '—' : l.min === l.max ? l.min : l.min + '–' + l.max}</td><td class="num">${l.pct ? l.pct + '%' : '—'}</td><td class="wrapc">${esc([l.note, l.held_item && '지닌 도구: ' + (I[l.held_item]?.ko || l.held_item)].filter(Boolean).join(' · '))}</td></tr>`).join('')}
+  </tbody></table></div>` : '<div class="card empty">야생이나 이벤트로 만나는 곳이 없습니다. 진화나 교환으로 얻습니다.</div>'}
+  <h2>레벨업으로 배우는 기술</h2>
+  <div class="tbl-wrap"><table><thead><tr><th class="num">Lv</th><th>기술</th><th>타입</th><th>분류</th><th class="num">위력</th><th class="num">명중</th><th class="num">PP</th></tr></thead><tbody>
+    ${lv.map(([l, k]) => moveRow(k, `<td class="num">${l <= 1 ? '기본' : l}</td>`)).join('')}
+  </tbody></table></div>
+  <h2>기술머신 · 가르치기</h2>
+  ${tms.length ? `<div class="tbl-wrap"><table><thead><tr><th>머신</th><th>기술</th><th>타입</th><th>분류</th><th class="num">위력</th><th class="num">명중</th><th class="num">PP</th></tr></thead><tbody>
+    ${tms.map(t => moveRow(t.move, `<td>${esc(t.machine_ko)}</td>`)).join('')}</tbody></table></div>` : '<div class="card empty">기술머신으로 배우는 기술이 없습니다.</div>'}`;
+}
+function bindMon(key) {
+  const b = $('#shiny'), art = $('#art');
+  let on = false;
+  b.onclick = () => { on = !on; b.classList.toggle('on', on); art.firstElementChild.outerHTML = spr(key, 2.75, on); };
+  bindRows();
+}
+function bindRows() { document.querySelectorAll('tr.click').forEach(tr => tr.onclick = e => { if (!e.target.closest('a')) location.hash = tr.dataset.href; }); }
+
+// moves
+const moveState = { q: '', type: '', cat: '', mode: '' };
+// compared with the latest official games (tools/wiki/build_compare.py)
+const MOVE_MODES = [
+  ['', '전체', () => true],
+  ['own', '암브로시아 전용', k => CMV[k]?.custom],
+  ['changed', '공식과 다른 기술', k => movesDiff(k).length],
+];
+// what differs from the official games, PP left out (a PP change alone is not worth listing)
+const movesDiff = k => (CMV[k]?.changed || []).filter(f => f !== 'pp');
+// a move value, with the official one under it when they differ
+function moveCell(m, f) {
+  const v = f === 'power' ? dash(m.power) : f === 'accuracy' ? (m.accuracy || '—') : m.pp;
+  const c = CMV[m.key];
+  if (!movesDiff(m.key).includes(f)) return v;
+  const o = c.official[f], up = (m[f] || 0) > o;
+  return `<b style="color:var(${up ? '--good' : '--bad'})">${v}</b><div class="small muted">공식 ${o}</div>`;
+}
+function viewMoves() {
+  setTitle('기술');
+  return `${crumb()}<h1>기술${itip('기술을 누르면 설명과 배우는 포켓몬이 나옵니다.<br>최신 공식 게임과 다른 값은 <b>초록</b>(높음)·<b>빨강</b>(낮음)으로 표시하고 아래에 공식 값을 적었습니다.')}</h1>
+  <div class="tools">
+    <input type="search" id="mq" placeholder="기술 이름 (한글/영어)" value="${esc(moveState.q)}">
+    <select id="mtype" aria-label="타입"><option value="">모든 타입</option>${D.types.map(t => `<option value="${t.id}">${esc(t.ko)}</option>`).join('')}</select>
+    <select id="mcat" aria-label="분류"><option value="">모든 분류</option><option>물리</option><option>특수</option><option>변화</option></select>
+    <span class="count" id="mcount"></span>
+  </div>
+  <div class="tools seg" id="mmode">${MOVE_MODES.map(([k, l, fn]) => `<button data-m="${k}" class="${moveState.mode === k ? 'on' : ''}">${l} <span class="muted small">${D.moves.filter(m => fn(m.key)).length}</span></button>`).join('')}</div>
+  <div class="tbl-wrap"><table><thead><tr><th>기술</th><th>타입</th><th>분류</th><th class="num">위력</th><th class="num">명중</th><th class="num">PP</th><th>설명</th></tr></thead><tbody id="mrows"></tbody></table></div>`;
+}
+function bindMoves() {
+  $('#mtype').value = moveState.type; $('#mcat').value = moveState.cat;
+  const draw = () => {
+    const s = norm(moveState.q);
+    const modeFn = MOVE_MODES.find(([k]) => k === moveState.mode)[2];
+    const list = D.moves.filter(m => (!s || norm(m.ko).includes(s) || norm(m.en).includes(s)) && (!moveState.type || m.type === moveState.type) && (!moveState.cat || m.category === moveState.cat) && modeFn(m.key))
+      .sort((a, b) => a.ko.localeCompare(b.ko, 'ko'));
+    $('#mcount').textContent = `${list.length}개`;
+    $('#mrows').innerHTML = list.map(m => { const c = CMV[m.key] || {}; return `<tr class="click" data-href="#/move/${m.key}"><td><a href="#/move/${m.key}">${esc(m.ko)}</a>${c.custom ? ' <span class="tag gold">전용</span>' : ''}<div class="muted small">${esc(m.en)}</div></td>
+      <td>${typeChip(m.type)}${c.changed?.includes('type') ? `<div class="small muted">공식 ${esc(TY[c.official.type]?.ko || c.official.type)}</div>` : ''}</td>
+      <td>${catChip(m.category)}${c.changed?.includes('category') ? `<div class="small muted">공식 ${esc(c.official.category)}</div>` : ''}</td>
+      <td class="num">${moveCell(m, 'power')}</td><td class="num">${moveCell(m, 'accuracy')}</td><td class="num">${moveCell(m, 'pp')}</td><td class="wrapc">${esc(m.desc)}</td></tr>`; }).join('')
+      || '<tr><td colspan="7" class="empty">조건에 맞는 기술이 없습니다.</td></tr>';
+    bindRows();
+  };
+  $('#mq').oninput = e => { moveState.q = e.target.value; draw(); };
+  $('#mtype').onchange = e => { moveState.type = e.target.value; draw(); };
+  $('#mcat').onchange = e => { moveState.cat = e.target.value; draw(); };
+  $('#mmode').onclick = e => { const b = e.target.closest('button'); if (!b) return; moveState.mode = b.dataset.m; document.querySelectorAll('#mmode button').forEach(x => x.classList.toggle('on', x === b)); draw(); };
+  draw();
+}
+function viewMove(key) {
+  const m = M[key]; if (!m) return notFound();
+  setTitle(m.ko);
+  const L = LEARN[key] || { lv: [], tm: [] };
+  const mons = list => list.length ? `<div class="mini-mons">${list.map(([k, extra]) => `<a href="#/p/${k}" title="${esc(P[k].ko)}${extra ? ' · ' + esc(extra) : ''}" style="display:flex;flex-direction:column;align-items:center;width:76px;color:var(--ink);font-size:12px;text-align:center">${spr(k, .9)}<span>${esc(P[k].ko)}</span>${extra ? `<span class="muted">${esc(extra)}</span>` : ''}</a>`).join('')}</div>` : '<p class="muted">없음</p>';
+  return `<p><a href="#/moves">← 기술 목록</a></p>
+  <section class="card pad">
+    <div class="meta-row" style="margin:0 0 6px">${typeChip(m.type, true)} ${catChip(m.category)}</div>
+    <h1>${esc(m.ko)} <span class="muted" style="font-size:15px">${esc(m.en)}</span></h1>
+    <p style="font-size:16px;margin:10px 0 4px">${esc(m.desc)}</p>
+    <p class="muted small" style="margin:0 0 14px">${esc(m.desc_en)}</p>
+    <dl class="kv">
+      <dt>위력</dt><dd>${dash(m.power)}</dd><dt>명중</dt><dd>${m.accuracy ? m.accuracy + '%' : '반드시 맞음'}</dd><dt>PP</dt><dd>${m.pp}</dd>
+      ${m.priority ? `<dt>우선도</dt><dd>${m.priority > 0 ? '+' : ''}${m.priority}</dd>` : ''}
+      ${m.effect_chance ? `<dt>추가 효과 확률</dt><dd>${m.effect_chance}%</dd>` : ''}
+      ${m.machines_ko.length ? `<dt>머신</dt><dd>${esc(m.machines_ko.join(', '))}</dd>` : ''}
+      ${CMV[key]?.custom ? `<dt>공식 게임</dt><dd><span class="tag gold">암브로시아 전용 기술</span></dd>` : ''}
+      ${movesDiff(key).length ? `<dt>공식 게임과 다른 점</dt><dd>${movesDiff(key).map(f => {
+        const c = CMV[key], name = { type: '타입', category: '분류', power: '위력', accuracy: '명중', pp: 'PP' }[f];
+        const off = f === 'type' ? (TY[c.official.type]?.ko || c.official.type) : c.official[f];
+        const now = f === 'type' ? TY[m.type]?.ko : f === 'category' ? m.category : m[f];
+        return `${name} ${esc(off)} → <b>${esc(now)}</b>`;
+      }).join('<br>')}</dd>` : ''}
+    </dl>
+  </section>
+  <h2>레벨업으로 배우는 포켓몬 <span class="muted small">${L.lv.length}</span></h2>${mons(L.lv)}
+  <h2>머신으로 배우는 포켓몬 <span class="muted small">${L.tm.length}</span></h2>${mons(L.tm)}`;
+}
+
+// items
+const itemState = { q: '', pocket: '도구' };
+function viewItems(params) {
+  setTitle('도구');
+  if (params.q != null) { itemState.q = params.q; itemState.pocket = ''; }
+  const pockets = ['도구', '볼', '기술머신', '중요한 물건'];
+  return `${crumb()}<h1>도구${itip('「얻는 곳」 꼬리표<br><b>주움</b> 바닥의 볼 · <b>숨김</b> 숨겨진 도구<br><b>받음</b> 사람에게 받음 · <b>구입</b> 상점<br><b>전화</b> 번호를 등록한 트레이너가 가끔 줌<br><b>2회차</b> 뉴 게임 플러스에서만 파는 상점')}</h1>
+  <div class="tools">
+    <input type="search" id="iq" placeholder="도구 이름 (한글/영어)" value="${esc(itemState.q)}">
+    <div class="seg" id="ipk"><button data-p="" class="${itemState.pocket ? '' : 'on'}">전체</button>${pockets.map(p => `<button data-p="${p}" class="${itemState.pocket === p ? 'on' : ''}">${p}</button>`).join('')}</div>
+    <span class="count" id="icount"></span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr><th>도구</th><th>주머니</th><th class="num">가격</th><th>설명</th><th>얻는 곳</th></tr></thead><tbody id="irows"></tbody></table></div>`;
+}
+// where an item can be had: picked up, hidden, handed over, or bought
+const HOW_TAG = { '주움': '주움', '숨겨진 도구': '숨김', '받음': '받음', '전화 선물': '전화' };
+function wherePieces(i) {
+  return [
+    // shops first, then the field, then the occasional phone gift and New Game Plus stock
+    ...(i.sold_at || []).map(w => `${esc(w)} <span class="tag gold">구입</span>`),
+    ...(i.found_at || []).filter(f => f.how !== '전화 선물').map(f => `${placeLink(f.map, f.map_ko)} <span class="tag">${HOW_TAG[f.how] || esc(f.how)}</span>`),
+    ...(i.found_at || []).filter(f => f.how === '전화 선물').map(f => `${placeLink(f.map, f.map_ko)} <span class="tag">전화</span>`),
+    ...(i.sold_ngp || []).map(w => `<span class="muted">${esc(w)}</span> <span class="tag">2회차</span>`),
+  ];
+}
+function whereCell(i, open = 3) {
+  const w = wherePieces(i);
+  if (!w.length) return '—';
+  if (w.length <= open) return w.join('<br>');
+  return `${w.slice(0, 2).join('<br>')}<details><summary>그 밖에 ${w.length - 2}곳</summary>${w.slice(2).join('<br>')}</details>`;
+}
+function bindItems() {
+  const draw = () => {
+    const s = norm(itemState.q);
+    const list = D.items.filter(i => (!s || norm(i.ko).includes(s) || norm(i.en).includes(s)) && (!itemState.pocket || i.pocket === itemState.pocket));
+    $('#icount').textContent = `${list.length}개`;
+    $('#irows').innerHTML = list.map(i => `<tr><td><b>${esc(i.ko)}</b><div class="muted small">${esc(i.en)}</div></td><td><span class="tag">${esc(i.pocket)}</span></td>
+      <td class="num">${i.price ? '₩' + i.price.toLocaleString() : '—'}</td><td class="wrapc">${esc(i.desc)}</td>
+      <td class="wrapc">${whereCell(i)}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">찾는 도구가 없습니다.</td></tr>';
+  };
+  $('#iq').oninput = e => { itemState.q = e.target.value; draw(); };
+  $('#ipk').onclick = e => { const b = e.target.closest('button'); if (!b) return; itemState.pocket = b.dataset.p; document.querySelectorAll('#ipk button').forEach(x => x.classList.toggle('on', x === b)); draw(); };
+  draw();
+}
+
+// trainers
+const ROLES = ['성도 체육관 관장', '관동 체육관 관장', '사천왕', '챔피언', '라이벌', '로켓단 보스', '로켓단 간부', '보스', '호연군', '침입자', '롤플레이'];
+const trState = { role: '성도 체육관 관장', q: '' };
+function trainerCard(t) {
+  return `<div class="card pad" id="tr-${esc(t.key)}">
+    <div class="tr-head"><span class="muted small">${esc(t.class_ko)}</span><b>${esc(t.name)}</b>${t.variant ? `<span class="tag">${esc(t.variant)}</span>` : ''}<span class="muted small">${esc(t.name_en)}</span></div>
+    <div class="small muted">${t.maps?.length ? t.maps.map((m, j) => placeLink(m, t.where[j])).join(' · ') : esc((t.where || []).join(' · ') || '장소 정보 없음')}</div>
+    ${t.note ? `<div class="small" style="margin-top:4px">${esc(t.note)}</div>` : ''}
+    <div class="team">${(t.team || []).map(m => `<div class="team-mon">${spr(m.species, .78)}<div>
+      <div class="top"><a href="#/p/${m.species}">${esc(m.ko)}</a><span class="muted">Lv.${m.level}</span>${m.item_ko ? `<span class="tag">${esc(m.item_ko)}</span>` : ''}</div>
+      ${m.moves?.length ? `<div class="moves">${m.moves.map(moveLink).join(' · ')}</div>` : ''}</div></div>`).join('') || '<div class="muted small">고정된 팀이 없습니다.</div>'}</div>
+  </div>`;
+}
+function viewTrainers() {
+  setTitle('트레이너');
+  return `${crumb()}<h1>트레이너${itip('관장·사천왕·보스 같은 주요 트레이너의 팀입니다.<br>난이도 「어려움」에서는 레벨 제한에 맞춰 레벨이 오릅니다.')}</h1>
+  <div class="tools"><input type="search" id="tq" placeholder="이름·직업으로 찾기" value="${esc(trState.q)}"><span class="count" id="tcount"></span></div>
+  <div class="tools seg" id="troles">${ROLES.map(r => `<button data-r="${r}" class="${trState.role === r ? 'on' : ''}">${r}</button>`).join('')}</div>
+  <div class="trainers" id="tlist"></div>`;
+}
+function bindTrainers() {
+  const draw = () => {
+    const s = norm(trState.q);
+    const list = D.trainers.filter(t => s ? (norm(t.name).includes(s) || norm(t.name_en).includes(s) || norm(t.class_ko).includes(s) || norm(t.class_en).includes(s)) : t.role === trState.role);
+    $('#tcount').textContent = `${list.length}명`;
+    $('#tlist').innerHTML = list.map(trainerCard).join('') || '<div class="empty">찾는 트레이너가 없습니다.</div>';
+  };
+  $('#tq').oninput = e => { trState.q = e.target.value; draw(); };
+  $('#troles').onclick = e => { const b = e.target.closest('button'); if (!b) return; trState.role = b.dataset.r; trState.q = ''; $('#tq').value = ''; document.querySelectorAll('#troles button').forEach(x => x.classList.toggle('on', x === b)); draw(); };
+  draw();
+}
+function viewTrainer(key) {
+  const t = T[key]; if (!t) return notFound();
+  setTitle(`${t.class_ko} ${t.name}`);
+  return `<p><a href="#/trainers">← 트레이너 목록</a></p><div style="max-width:560px">${trainerCard(t)}</div>`;
+}
+
+// places
+const plState = { region: '성도' };
+function viewPlaces() {
+  setTitle('지역');
+  const groups = {};
+  for (const p of D.places[plState.region] || []) (groups[p.landmark_ko || p.ko] ||= []).push(p);
+  return `<h1>지역${itip('마을·도로별로 묶었습니다. 장소를 누르면 나오는 포켓몬과 트레이너가 보입니다.')}</h1>
+  <div class="tools seg" id="preg">${Object.keys(D.places).map(r => `<button data-r="${r}" class="${plState.region === r ? 'on' : ''}">${r}</button>`).join('')}</div>
+  <div class="places">${Object.entries(groups).map(([g, list]) => {
+    const mons = [...new Set(list.flatMap(p => p.pokemon.map(x => x.species)))];
+    return `<div class="card pad"><h3>${esc(g)}</h3>
+      ${list.map(p => `<div class="place-sub"><a href="#/place/${p.key}">${esc(p.ko)}</a><span class="muted small">${p.pokemon.length ? '포켓몬 ' + new Set(p.pokemon.map(x => x.species)).size : ''}${p.trainers.length ? ' · 트레이너 ' + p.trainers.length : ''}</span></div>`).join('')}
+      ${mons.length ? `<div class="mini-mons">${mons.slice(0, 18).map(k => `<a href="#/p/${k}" title="${esc(P[k]?.ko || k)}">${spr(k, .6)}</a>`).join('')}${mons.length > 18 ? `<span class="muted small" style="align-self:center">+${mons.length - 18}</span>` : ''}</div>` : ''}
+    </div>`;
+  }).join('')}</div>`;
+}
+function bindPlaces() {
+  $('#preg').onclick = e => { const b = e.target.closest('button'); if (!b) return; plState.region = b.dataset.r; render(); };
+}
+function viewPlace(key) {
+  const p = PL[key]; if (!p) return notFound();
+  setTitle(p.ko);
+  const byMethod = {};
+  for (const e of p.pokemon) (byMethod[e.method] ||= []).push(e);
+  const marts = D.marts.filter(m => m.maps.includes(key));
+  const sibs = (D.places[p.region] || []).filter(x => (x.landmark_ko || x.ko) === (p.landmark_ko || p.ko) && x.key !== key);
+  return `<p><a href="#/places">← 지역 목록</a></p>
+  <h1>${esc(p.ko)} <span class="muted" style="font-size:15px">${esc(p.en)}</span></h1>
+  <p class="muted">${esc(p.region)}${p.landmark_ko && p.landmark_ko !== p.ko ? ' · ' + esc(p.landmark_ko) : ''}</p>
+  ${sibs.length ? `<p class="small">같은 곳: ${sibs.map(s => `<a href="#/place/${s.key}">${esc(s.ko)}</a>`).join(' · ')}</p>` : ''}
+  <h2>나오는 포켓몬</h2>
+  ${Object.keys(byMethod).length ? Object.entries(byMethod).map(([meth, list]) => `<h3 style="margin-top:14px">${esc(meth)}</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>포켓몬</th><th>타입</th><th>시간</th><th class="num">레벨</th><th class="num">확률</th></tr></thead><tbody>
+    ${list.map(e => `<tr class="click" data-href="#/p/${e.species}"><td>${monLink(e.species)}</td><td>${(P[e.species]?.types || []).map(t => typeChip(t)).join(' ')}</td><td>${esc(e.time || '—')}</td>
+      <td class="num">${e.min == null ? '—' : e.min === e.max ? e.min : e.min + '–' + e.max}</td><td class="num">${e.pct ? e.pct + '%' : '—'}</td></tr>`).join('')}
+    </tbody></table></div>`).join('') : '<div class="card empty">이곳에는 포켓몬이 나오지 않습니다.</div>'}
+  ${marts.length ? `<h2>상점</h2>${marts.map(m => `<div class="card pad" style="margin-bottom:10px"><div class="small muted">${esc(m.where.join(', '))}${m.note ? ` · <b>${esc(m.note)}</b>` : ''}</div><div class="meta-row">${m.items.map(k => `<a class="chip" href="#/items?q=${encodeURIComponent(I[k]?.ko || k)}">${esc(I[k]?.ko || k)}</a>`).join('')}</div></div>`).join('')}` : ''}
+  ${p.trainers.length ? `<h2>트레이너</h2><div class="trainers">${p.trainers.filter(k => T[k]).map(k => trainerCard(T[k])).join('')}</div>` : ''}`;
+}
+
+// types
+function viewTypes() {
+  setTitle('타입 상성표');
+  const ts = D.types.map(t => t.id);
+  const cell = (a, d) => {
+    if (a === 'UBER') return `<td class="xn" title="우버 기술은 항상 보통 효과">1</td>`;
+    const m = EFF[a]?.[d] ?? 1;
+    return m === 1 ? '<td></td>' : `<td class="${m === 2 ? 'x2' : m === 0 ? 'x0' : 'x05'}" title="${esc(TY[a].ko)} → ${esc(TY[d].ko)} ×${m}">${m === .5 ? '½' : m}</td>`;
+  };
+  return `${crumb()}<h1>타입 상성표${itip('왼쪽이 공격하는 기술, 위쪽이 맞는 포켓몬의 타입입니다. 빈 칸은 보통(×1)입니다.')}</h1>
+  <div class="legend"><span><i style="background:color-mix(in srgb,var(--good) 30%,transparent)"></i>×2 효과가 굉장함</span><span><i style="background:color-mix(in srgb,var(--bad) 22%,transparent)"></i>×½ 효과가 별로</span><span><i style="background:var(--ink)"></i>×0 효과 없음</span></div>
+  <div class="tbl-wrap" style="max-height:80vh"><table class="chart"><thead><tr><th style="left:0;z-index:3"><span class="small muted">공격↓ 방어→</span></th>${ts.map(t => `<th>${typeChip(t)}</th>`).join('')}</tr></thead>
+  <tbody>${ts.map(a => `<tr><th>${typeChip(a)}</th>${ts.map(d => cell(a, d)).join('')}</tr>`).join('')}</tbody></table></div>
+  <h2>알아 둘 점</h2>
+  <div class="card pad"><ul class="notes">
+    <li><span class="type t-UBER">우버</span>는 암브로시아의 새 타입입니다. 우버 타입 <b>기술</b>은 어떤 타입에게나 보통 효과로 들어갑니다.</li>
+    <li>노말·격투 기술은 고스트 타입에게 항상 효과가 없습니다(꿰뚫어보기 같은 기술로도 바뀌지 않음).</li>
+    <li>프리즈드라이(얼음)는 물 타입에게 효과가 굉장합니다(표 밖의 특례).</li>
+  </ul></div>`;
+}
+
+// ---------- availability ----------
+const STAGE_SHORT = ['처음부터', '비상 이긴 뒤', '호일 이긴 뒤', '꼭두 이긴 뒤', '유빈 이긴 뒤', '사도·규리 이긴 뒤', '류옹 이긴 뒤', '이향 이긴 뒤', '챔피언 뒤', '최종장'];
+function stageChip(s) {
+  const st = AV.stages[s];
+  return `<span class="stage" title="${esc(st.name)} · 육성 제한 ${st.cap} · 포획 제한 ${st.catch}"><b>${STAGE_SHORT[s]}</b>육성 제한 ${st.cap}</span>`;
+}
+function availHow(key, withRoot = true) {
+  let k = key, g = 0; const chain = [];
+  while (AV.pokemon[k]?.via && g++ < 4) { const a = AV.pokemon[k]; chain.unshift(`${P[a.via].ko} → ${P[k].ko}: ${a.evo}`); k = a.via; }
+  const r = AV.pokemon[k]; if (!r) return '';
+  const bits = [r.method + (r.level ? ` Lv${r.level}` : ''), r.time && r.time !== '종일' ? r.time : '', r.pct ? r.pct + '%' : '', r.note || ''].filter(Boolean).map(esc).join(' · ');
+  return `${k !== key && withRoot ? monLink(k, .5) + ' ' : ''}${placeLink(r.map, r.map_ko)} ${bits}${chain.length ? `<br><span class="muted small">진화: ${chain.map(esc).join(' / ')}</span>` : ''}`;
+}
+
+// ---------- start guide ----------
+const GYM_FOR_STAGE = [[0], [1], [2], [3], [4, 5], [6], [7], [8], [], []];
+function teamLv(t) { const l = (t?.team || []).map(m => m.level); return l.length ? (Math.min(...l) === Math.max(...l) ? `Lv${l[0]}` : `Lv${Math.min(...l)}–${Math.max(...l)}`) : ''; }
+function viewStart() {
+  setTitle('처음 시작 가이드');
+  const perStage = AV.stages.map((_, i) => Object.values(AV.pokemon).filter(a => a.stage === i).length);
+  const pickCard = it => { const p = P[it.key]; return `<div class="card pad pick">
+      <a href="#/p/${it.key}">${spr(it.key, 1.15)}</a>
+      <div><div class="meta-row" style="margin:0"><a class="nm" href="#/p/${it.key}">${esc(p.ko)}</a>${p.types.map(t => typeChip(t)).join('')}<span class="muted small">합계 ${p.stats.total}</span></div>
+      <div style="margin-top:4px">${stageChip(AV.pokemon[it.key].stage)}</div>
+      <p>${esc(it.why)}</p><div class="how">${esc(it.how)}</div></div></div>`; };
+  return `<h1>처음 시작 가이드${itip('처음 하는 사람이 궁금해할 내용을 모았습니다.<br>추천 포켓몬과 파티는 언제·어디서 얻는지까지 따져 골랐습니다.')}</h1>
+  <div class="toc">${[['s-cap', '레벨 제한'], ['s-faq', '자주 묻는 질문'], ['s-gym', '체육관 공략'], ['s-pick', '추천 포켓몬'], ['s-team', '추천 파티']].map(([id, l]) => `<a href="#/start" data-jump="${id}">${l}</a>`).join('')}</div>
+
+  <h2 id="s-cap">레벨 제한과 잡을 수 있는 레벨${itip('관장을 이길 때마다 제한이 오릅니다.<br>포획 제한보다 레벨이 높은 야생 포켓몬은 잡을 수 없습니다.<br>숫자를 누르면 그때까지 얻을 수 있는 포켓몬을 도감에서 보여 줍니다.')}</h2>
+  <div class="tbl-wrap"><table class="capt"><thead><tr><th style="text-align:left">단계</th><th>육성 제한</th><th>포획 제한</th><th>다음 상대</th><th>새로 얻는 포켓몬</th></tr></thead><tbody>
+  ${AV.stages.map((st, i) => `<tr><td style="text-align:left">${i ? esc(st.name) + ' 뒤' : '시작'}</td><td><b>${st.cap}</b></td><td>${st.catch}</td>
+    <td>${GYM_FOR_STAGE[i].map(g => { const gy = G.gyms[g]; return `${esc(gy.leader)} <span class="muted small">${teamLv(T[gy.trainer])}</span>`; }).join(' · ') || '—'}</td>
+    <td><a href="#/dex?stage=${i}">${perStage[i]}종</a></td></tr>`).join('')}
+  </tbody></table></div>
+
+  <h2 id="s-faq">자주 묻는 질문</h2>
+  <div class="card pad faq">${G.faq.map((f, i) => `<details${(f.open ?? i < 2) ? ' open' : ''}><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('')}</div>
+
+  <h2 id="s-gym">체육관 공략${itip('성도 체육관을 레벨 순서로 놓았습니다. 순서는 자유지만, 레벨 제한 때문에 이 순서가 자연스럽습니다.')}</h2>
+  <div class="gyms">${G.gyms.map(gy => { const t = T[gy.trainer]; return `<div class="card pad gym">
+    <h3>${esc(gy.leader)} <span class="muted small">${esc(gy.town)} · ${teamLv(t)}</span></h3>
+    <div class="mini-mons">${(t?.team || []).map(m => `<a href="#/p/${m.species}" title="${esc(m.ko)} Lv${m.level}">${spr(m.species, .75)}</a>`).join('')}</div>
+    <div class="row"><span>상대 타입</span>${gy.types.map(x => typeChip(x)).join('')}</div>
+    <div class="row"><span>잘 통함</span>${gy.weak.map(x => typeChip(x)).join('')}</div>
+    <div class="row"><span>추천</span>${gy.counters.map(k => `${monLink(k, .5)}`).join(' ')}</div>
+    <p>${esc(gy.tip)}</p>
+    ${t ? `<p class="small"><a href="#/trainer/${encodeURIComponent(gy.trainer)}">팀과 기술 자세히 →</a></p>` : ''}</div>`; }).join('')}</div>
+
+  <h2 id="s-pick">추천 포켓몬</h2>
+  ${G.picks.map(ph => `<h3 style="margin-top:18px">${esc(ph.phase)} <span class="muted small">${esc(ph.range)}</span></h3>
+    <p class="muted" style="margin:0 0 10px">${esc(ph.lead)}</p>
+    <div class="picks">${ph.items.map(pickCard).join('')}</div>`).join('')}
+
+  <h2 id="s-team">추천 파티${itip('스타팅마다 하나씩, 관장 상성과 얻는 시기를 맞춘 6마리입니다.<br>시기 표시는 그 포켓몬을 완성할 수 있는 때입니다.')}</h2>
+  ${G.teams.map(tm => `<div class="card pad team"><h3>${esc(tm.title)}</h3><p class="muted" style="margin:0">${esc(tm.concept)}</p>
+    <div class="teamgrid">${tm.members.map(m => { const p = P[m.key]; return `<div class="tm"><a href="#/p/${m.key}">${spr(m.key, 1)}</a><div>
+      <div><a class="nm" href="#/p/${m.key}">${esc(p.ko)}</a> <span class="role">${esc(m.role)}</span></div>
+      <div style="margin:2px 0">${stageChip(AV.pokemon[m.key]?.stage ?? m.when)}</div><div class="how">${esc(m.how)}</div></div></div>`; }).join('')}</div>
+    <p class="small" style="margin:10px 0 0">${esc(tm.notes)}</p></div>`).join('')}`;
+}
+function bindStart() {
+  document.querySelectorAll('[data-jump]').forEach(a => a.onclick = e => { e.preventDefault(); document.getElementById(a.dataset.jump)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+}
+
+// ---------- changes vs official ----------
+const chgState = { q: '', mode: 'changed', sort: 'dex' };
+const STATS6 = [['hp', 'HP'], ['atk', '공격'], ['def', '방어'], ['spa', '특공'], ['spd', '특방'], ['spe', '스피드'], ['total', '합계']];
+// species whose forms work differently from the official games
+const FORM_TAG = { NINETALES_A: '알로라', URSALUNA_B: '붉은 달' };
+const formTag = k => FORM_TAG[k] ? ` <span class="tag">${FORM_TAG[k]}</span>` : '';
+const FORM_NOTES = {
+  AEGISLASH: '실드폼·블레이드폼이 따로 있지 않고 특성으로 바뀝니다. 배틀에 나오면 방어·특수방어가 2랭크 오르고(실드폼), 공격 기술을 쓰면 올랐던 방어·특수방어가 2랭크 내려갑니다(블레이드폼). 그림과 종족값은 하나뿐입니다.',
+  ROTOM: '가전제품 폼(히트·워시·프로스트·스핀·커트)이 없습니다. 타입은 기본 로토무(전기·고스트)이고, 종족값은 히트로토무와 같습니다.',
+  UNOWN: 'A~Z 26가지 글자 모양이 있습니다. 모양은 개체값으로 정해지고, 능력치와 특성은 모두 같습니다.',
+  NINETALES_A: '알로라의 모습입니다. 게임 안에서는 이름이 그냥 「나인테일」로 나옵니다.',
+  NINETALES: '알로라의 모습(얼음·페어리)은 따로 있는 포켓몬입니다.',
+  URSALUNA: '게임 안 이름은 「다투곰♂」이지만 성별이 아니라 모습의 차이입니다. ♂는 보통 다투곰, ♀는 공식 게임의 「붉은 달」의 모습입니다. 링곰·깜지곰에 태양의돌을 쓰면 ♂, 달의돌을 쓰면 ♀가 됩니다.',
+  URSALUNA_B: '게임 안 이름은 「다투곰♀」이지만 성별이 아니라 모습의 차이입니다. 공식 게임의 「붉은 달」의 모습에 해당하며, 링곰·깜지곰에 달의돌을 쓰면 됩니다.',
+  SHAYMIN: '랜드폼 없이 스카이폼(풀·비행) 하나뿐입니다.',
+  DEOXYS: '폼은 하나뿐이며, 종족값은 공식 게임의 어택폼과 같습니다.',
+  ZYGARDE: '폼은 하나뿐이며, 종족값은 공식 게임의 퍼펙트폼에 가깝습니다.',
+};
+function changeBody(key, compact) {
+  const p = P[key], c = CMP[key];
+  if (!c || c.custom) return `<p class="small">암브로시아에만 있는 포켓몬입니다. 비교할 공식 데이터가 없습니다.</p>`;
+  const types = c.type_changed ? `<span class="strike">${c.types.map(t => typeChip(t)).join(' ')}</span> → ${p.types.map(t => typeChip(t)).join(' ')}` : p.types.map(t => typeChip(t)).join(' ');
+  const st = STATS6.map(([k, l]) => { const d = (p.stats[k] - c.stats[k]); return `<div class="${d > 0 ? 'up' : d < 0 ? 'dn' : ''}"><span class="muted">${l}</span><b>${p.stats[k]}</b><i>${d ? (d > 0 ? '+' : '') + d : '='}</i></div>`; }).join('');
+  const nl = c.new_level_moves, nt = c.new_tm_moves, own = c.custom_moves;
+  return `${c.form_ko ? `<div class="small muted">비교 대상: 공식 게임의 <b>${esc(c.form_ko)}</b> (종족값이 가장 가까운 모습)</div>` : ''}<div class="meta-row" style="margin:4px 0">${types}</div>
+    <div class="st6">${st}</div>
+    ${compact ? '' : `<div class="lbl2">특성 (도감 2쪽)</div><div class="small">${esc(p.dex_page2)}</div>`}
+    ${own.length ? `<div class="lbl2">암브로시아 전용 기술</div><div class="chips">${own.map(k => `<a class="chip own" href="#/move/${k}">${esc(M[k].ko)}</a>`).join('')}</div>` : ''}
+    ${nl.length ? `<div class="lbl2">공식 게임에서는 못 배우는 기술 · 레벨업 ${nl.length}</div><div class="chips">${nl.map(k => `<a class="chip new" href="#/move/${k}">${esc(M[k].ko)}</a>`).join('')}</div>` : ''}
+    ${nt.length && !compact ? `<div class="lbl2">공식 게임에서는 못 배우는 기술 · 기술머신 ${nt.length}</div><div class="chips">${nt.map(k => `<a class="chip new" href="#/move/${k}">${esc(M[k].ko)}</a>`).join('')}</div>` : ''}`;
+}
+function isChanged(k) { const c = CMP[k]; return !c || c.custom || c.type_changed || Object.keys(c.stat_delta || {}).length; }
+function viewChanges() {
+  setTitle('바뀐 점');
+  const all = D.pokemon.map(p => p.key);
+  const nStat = all.filter(k => Object.keys(CMP[k]?.stat_delta || {}).length).length;
+  const nType = all.filter(k => CMP[k]?.type_changed).length;
+  const nOwn = all.filter(k => CMP[k]?.custom_moves?.length).length;
+  return `<h1>바뀐 점${itip('크리스탈을 바탕으로 무엇이 달라졌는지 모았습니다.<br>게임 시스템은 원작 크리스탈과, 포켓몬은 최신 공식 게임과 비교했습니다.')}</h1>
+  <div class="toc"><a href="#/changes" data-jump="c-sys">게임 시스템</a><a href="#/changes" data-jump="c-mon">포켓몬</a></div>
+  <h2 id="c-sys">게임 시스템${itip('원작 크리스탈과 달라진 점을 주제별로 모았습니다.')}</h2>
+  <div class="features">${D.features.map(featureCard).join('')}</div>
+  <h2 id="c-mon">포켓몬${itip('최신 공식 게임과 비교했습니다.<br><b>초록</b>은 오른 능력치, <b>빨강</b>은 내린 능력치입니다.<br>특성은 모든 포켓몬이 암브로시아에서 새로 받았습니다.')}</h2>
+  <div class="quick" style="margin:12px 0 16px">
+    <a href="#/changes" data-mode="stat"><b>${nStat}종</b><span>종족값이 바뀜</span></a>
+    <a href="#/changes" data-mode="type"><b>${nType}종</b><span>타입이 바뀜</span></a>
+    <a href="#/changes" data-mode="own"><b>${nOwn}종</b><span>암브로시아 전용 기술을 배움</span></a>
+    <a href="#/changes" data-mode="all"><b>${all.length}종</b><span>전체 보기 (특성·새 기술 포함)</span></a>
+  </div>
+  <div class="tools">
+    <input type="search" id="cq" placeholder="이름으로 찾기" value="${esc(chgState.q)}">
+    <div class="seg" id="cmode">${[['changed', '능력치·타입 변경'], ['all', '전체']].map(([m, l]) => `<button data-m="${m}" class="${chgState.mode === m ? 'on' : ''}">${l}</button>`).join('')}</div>
+    <select id="csort" aria-label="정렬"><option value="dex">새 도감 순</option><option value="delta">변화가 큰 순</option><option value="up">합계가 가장 오른 순</option></select>
+    <span class="count" id="ccount"></span>
+  </div>
+  <div id="clist"></div>`;
+}
+function bindChanges() {
+  bindStart(); // the jump links
+  $('#csort').value = chgState.sort;
+  const mag = k => Object.entries(CMP[k]?.stat_delta || {}).filter(([s]) => s !== 'total').reduce((a, [, v]) => a + Math.abs(v), 0) + (CMP[k]?.type_changed ? 50 : 0);
+  const draw = () => {
+    const s = norm(chgState.q);
+    let list = D.pokemon.filter(p => (!s || norm(p.ko).includes(s) || norm(p.en).includes(s)) && (chgState.mode === 'all' || s || isChanged(p.key)))
+      .filter(p => chgState.filter ? chgState.filter(p.key) : true);
+    const by = { dex: (a, b) => a.dex_order - b.dex_order, delta: (a, b) => mag(b.key) - mag(a.key), up: (a, b) => (CMP[b.key]?.stat_delta?.total || 0) - (CMP[a.key]?.stat_delta?.total || 0) }[chgState.sort];
+    list = list.sort(by);
+    $('#ccount').textContent = `${list.length}종`;
+    $('#clist').innerHTML = list.map(p => `<div class="card chg"><a href="#/p/${p.key}">${spr(p.key, 1.25)}</a><div>
+      <div><a class="nm" href="#/p/${p.key}">${esc(p.ko)}</a>${formTag(p.key)} <span class="muted small">#${no3(p.dex_order)} ${esc(p.en)}</span></div>${changeBody(p.key)}</div></div>`).join('') || '<div class="empty">조건에 맞는 포켓몬이 없습니다.</div>';
+  };
+  $('#cq').oninput = e => { chgState.q = e.target.value; draw(); };
+  $('#csort').onchange = e => { chgState.sort = e.target.value; draw(); };
+  $('#cmode').onclick = e => { const b = e.target.closest('button'); if (!b) return; chgState.mode = b.dataset.m; chgState.filter = null; document.querySelectorAll('#cmode button').forEach(x => x.classList.toggle('on', x === b)); draw(); };
+  document.querySelectorAll('[data-mode]').forEach(a => a.onclick = e => {
+    e.preventDefault();
+    const m = a.dataset.mode;
+    chgState.filter = { stat: k => Object.keys(CMP[k]?.stat_delta || {}).length, type: k => CMP[k]?.type_changed, own: k => CMP[k]?.custom_moves?.length, all: null }[m];
+    chgState.mode = m === 'all' ? 'all' : 'all';
+    document.querySelectorAll('#cmode button').forEach(x => x.classList.toggle('on', x.dataset.m === chgState.mode));
+    draw(); $('#clist').scrollIntoView({ behavior: 'smooth' });
+  });
+  draw();
+}
+
+// ---------- walkthrough ----------
+function wChapter(c, i, prefix) {
+  const battle = k => { const t = T[k]; if (!t) return ''; return `<a class="wbattle" href="#/trainer/${encodeURIComponent(k)}"><span class="muted">${esc(t.class_ko)}</span><b>${esc(t.name)}</b><span class="muted">${teamLv(t)}</span><span class="mm">${(t.team || []).map(m => `<span data-tip="p:${m.species}">${spr(m.species, .5)}</span>`).join('')}</span></a>`; };
+  return `<section class="card wchap" id="w-${esc(c.id)}">
+    <h2><span class="num">${prefix}${i + 1}</span>${esc(c.title)}${c.cap ? `<span class="stage"><b>육성 제한</b>${c.cap}</span>` : ''}</h2>
+    ${c.where?.length ? `<div class="small muted" style="margin-top:6px">${c.where.map(k => placeLink(k)).join(' · ')}</div>` : ''}
+    ${c.summary ? `<p style="margin:10px 0 0">${esc(c.summary)}</p>` : ''}
+    ${wMons(c.id, c.where || [])}
+    <ol class="wsteps">${(c.steps || []).map(st => `<li><p>${esc(st.text)}</p>
+      ${(st.trainers?.length || st.items?.length || st.pokemon?.length) ? `<div class="wbits">
+        ${(st.trainers || []).map(battle).join('')}
+        ${(st.pokemon || []).filter(k => P[k]).map(k => `<a class="chip" href="#/p/${k}" data-tip="p:${k}">${spr(k, .4)}${esc(P[k].ko)}</a>`).join('')}
+        ${(st.items || []).filter(k => I[k]).map(k => `<a class="chip own" href="#/items?q=${encodeURIComponent(I[k].ko)}" data-tip="i:${k}">${esc(I[k].ko)}</a>`).join('')}
+      </div>` : ''}</li>`).join('')}</ol>
+    ${c.tips?.length ? `<div class="wtips"><ul>${c.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>` : ''}
+  </section>`;
+}
+// Pokémon this chapter newly makes obtainable (tools/wiki/build_walk_mons.py)
+const WM_SHORT = m => m.includes('파도타기') ? '파도타기' : m.includes('낚시') ? '낚시' : m.includes('박치기') ? '박치기'
+  : m.includes('바위깨기') ? '바위깨기' : m.includes('벌레잡기') ? '벌레잡기대회' : m.includes('이로치') ? '이로치' : m.includes('대량발생') ? '대량발생' : '';
+const wmChip = (k, extra) => `<a class="chip" href="#/p/${k}" data-tip="p:${k}">${spr(k, .4)}${esc(P[k].ko)}${extra ? ` <i>${esc(extra)}</i>` : ''}</a>`;
+function wmRows(list, special, where = []) {
+  const by = new Map();
+  for (const r of list) { if (!by.has(r.map)) by.set(r.map, []); by.get(r.map).push(r); }
+  const rank = m => { const i = where.indexOf(m); return i < 0 ? 99 : i; };
+  return [...by].sort((a, b) => rank(a[0]) - rank(b[0])).map(([m, rs]) => `<div class="wm-row"><span class="wm-place">${placeLink(m, rs[0].map_ko)}</span><span class="wm-chips">${rs.map(r =>
+    wmChip(r.key, special ? r.method.replace(' (이로치)', '·이로치') + (r.level ? ` Lv${r.level}` : '') : [WM_SHORT(r.method), r.level ? 'Lv' + r.level : ''].filter(Boolean).join(' '))).join('')}</span></div>`).join('');
+}
+function wMons(id, where) {
+  const all = (WM[id] || []).filter(r => P[r.key]);
+  if (!all.length) return '';
+  const sp = all.filter(r => r.kind === 'special'), wild = all.filter(r => r.kind === 'wild' && !r.off_route),
+    far = all.filter(r => r.kind === 'wild' && r.off_route), evo = all.filter(r => r.kind === 'evo');
+  return `<div class="wmons"><div class="wmons-h">이 구간에서 새로 얻을 수 있는 포켓몬 <span class="muted small">${all.length}종</span></div>
+    ${sp.length ? wmRows(sp, true) : ''}
+    ${wild.length ? wmRows(wild, false, where) : ''}
+    ${far.length ? `<div class="wm-sub">공략 경로에서 벗어난 곳${itip('지도가 처음부터 열려 있어서, 레벨 제한만 맞으면 공략 순서와 상관없이 잡을 수 있습니다.')}</div>${wmRows(far, false)}` : ''}
+    ${evo.length ? `<div class="wm-row"><span class="wm-place">진화로</span><span class="wm-chips">${evo.map(r => wmChip(r.key, r.method.replace(/^레벨 /, 'Lv'))).join('')}</span></div>` : ''}
+  </div>`;
+}
+let walkMons = true;
+try { walkMons = localStorage.getItem('amb-walk-mons') !== 'off'; } catch (e) {}
+function bindWalk() {
+  bindStart();
+  const box = $('#wmtoggle'), root = $('#walkroot');
+  if (!box || !root) return;
+  box.checked = walkMons; root.classList.toggle('walk-hide-mons', !walkMons);
+  box.onchange = () => {
+    walkMons = box.checked; root.classList.toggle('walk-hide-mons', !walkMons);
+    try { localStorage.setItem('amb-walk-mons', walkMons ? 'on' : 'off'); } catch (e) {}
+  };
+}
+function viewWalk() {
+  setTitle('공략');
+  if (!W) return '<div class="empty">공략을 불러오지 못했습니다.</div>';
+  const toc = (list, prefix) => list.map((c, i) => `<a href="#/walk" data-jump="w-${esc(c.id)}">${prefix}${i + 1}. ${esc(c.title)}</a>`).join('');
+  return `<h1>공략${itip(esc(W.intro) + '<br><br>관장별 상성과 추천 파티는 「처음 시작」 탭에 있습니다. 배틀 상자를 누르면 상대 팀의 기술까지 보입니다.')}</h1>
+  <label class="wtoggle"><input type="checkbox" id="wmtoggle" checked> 구간마다 새로 얻을 수 있는 포켓몬 보기</label>
+  <details class="tocd"${innerWidth > 640 ? ' open' : ''}><summary>구간 바로가기 <span class="muted small">${W.chapters.length + (W.postgame?.length || 0)}구간</span></summary>
+  <div class="toc">${toc(W.chapters, '')}</div>
+  ${W.postgame?.length ? `<div class="toc"><span class="muted small" style="align-self:center">클리어 후</span>${toc(W.postgame, '후')}</div>` : ''}</details>
+  <div id="walkroot"><div style="margin-top:16px">${W.chapters.map((c, i) => wChapter(c, i, '')).join('')}</div>
+  ${W.postgame?.length ? `<h2>클리어 후</h2>${W.postgame.map((c, i) => wChapter(c, i, '후')).join('')}` : ''}</div>`;
+}
+
+// ---------- training ----------
+function viewTrain() {
+  setTitle('육성 가이드');
+  const t = G.training;
+  return `<h1>육성 가이드${itip(esc(t.lead))}</h1>
+  <div class="tbl-wrap" style="margin:14px 0"><table><thead><tr><th>항목</th><th>암브로시아</th><th>설명</th></tr></thead><tbody>
+    ${t.summary.map(([a, b, c]) => `<tr><td><b>${esc(a)}</b></td><td>${esc(b)}</td><td class="wrapc">${esc(c)}</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="toc">${t.sections.map(x => `<a href="#/train" data-jump="${x.id}">${esc(x.title)}</a>`).join('')}</div>
+  ${t.sections.map(x => `<section class="card pad" id="${x.id}" style="margin-top:14px">
+    <h2 style="margin-top:0">${esc(x.title)}</h2>
+    ${x.paras.map(q => `<p>${esc(q)}</p>`).join('')}
+    ${x.table ? `<div class="tbl-wrap"><table class="capt"><thead><tr>${x.table.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${x.table.rows.map(r => `<tr>${r.map((c, i) => `<td${i ? '' : ' style="text-align:left"'}>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : ''}
+    ${x.list ? `<div class="tbl-wrap"><table><tbody>${x.list.map(([n, k, d]) => `<tr><td><b>${k ? placeLink(k, n) : esc(n)}</b></td><td class="wrapc">${esc(d)}</td></tr>`).join('')}</tbody></table></div>` : ''}
+    ${x.after ? `<p class="small muted">${esc(x.after)}</p>` : ''}
+  </section>`).join('')}`;
+}
+// ---------- reference tables ----------
+// species that evolve by trade in the official games
+const TRADE_OFFICIAL = ['KADABRA', 'MACHOKE', 'GRAVELER', 'HAUNTER', 'ONIX', 'SCYTHER', 'SEADRA', 'POLIWHIRL', 'SLOWPOKE', 'PORYGON',
+  'PORYGON2', 'RHYDON', 'ELECTABUZZ', 'MAGMAR', 'DUSCLOPS', 'CLAMPERL', 'BOLDORE', 'GURDURR', 'FEEBAS', 'KARRABLAST', 'SHELMET', 'SPRITZEE', 'SWIRLIX', 'PHANTUMP', 'PUMPKABOO'];
+const lvRange = l => l.min == null ? '—' : l.min === l.max ? `Lv.${l.min}` : `Lv.${l.min}~${l.max}`;
+const itemLink = k => I[k] ? `<a href="#/items?q=${encodeURIComponent(I[k].ko)}">${esc(I[k].ko)}</a>` : esc(k);
+function evoRow(p, e, extra = '') {
+  const how = e.raw[0] === 'EVOLVE_ITEM' ? `${itemLink(e.raw[1])} 사용` : e.raw[0] === 'EVOLVE_HAPPINESS' ? '친밀도가 높을 때 레벨업' : esc(e.method);
+  return `<tr><td>${monLink(p.key)}</td><td>${monLink(e.to)}</td><td>${how}</td>${extra}</tr>`;
+}
+function viewInfo(arg) {
+  const trade = TRADE_OFFICIAL.filter(k => P[k]?.evolutions.length).map(k => P[k]);
+  const special = D.pokemon.flatMap(p => p.evolutions.filter(e => e.raw[0] !== 'EVOLVE_LEVEL').map(e => [p, e]));
+  const stones = [...new Set(special.filter(([, e]) => e.raw[0] === 'EVOLVE_ITEM').map(([, e]) => e.raw[1]))].filter(k => I[k]);
+  const locs = (pred) => D.pokemon.flatMap(p => p.locations.filter(pred).map(l => [p, l]));
+  const gifts = locs(l => ['선물로 받음', '알 선물', '교환', '게임코너 경품'].includes(l.method));
+  const once = locs(l => l.method.startsWith('고정 조우'));
+  const machines = D.items.filter(i => i.teaches).sort((a, b) => a.id - b.id);
+  const marts = new Map();
+  for (const m of D.marts) {
+    const w = m.where.join(' · ');
+    if (!w) continue;
+    const id = w + '|' + (m.note || '');
+    const e = marts.get(id) || { w, note: m.note, set: new Set() };
+    m.items.forEach(k => e.set.add(k));
+    marts.set(id, e);
+  }
+  // every table is built as before, kept by id; the page shows the cards or one table
+  const parts = {};
+  const sec = (id, title, lead, body) => { parts[id] = { title, lead, body }; return ''; };
+  // the overview cards: what each table holds, how much, and a few faces
+  const CARDS = [
+    ['i-trade', '교환 없이 진화하는 포켓몬', trade.reduce((n, p) => n + p.evolutions.length, 0) + '가지', trade.slice(0, 3).map(p => p.key)],
+    ['i-evo', '돌·친밀도로 진화하는 포켓몬과 돌 얻는 곳', special.length + '가지', ['EEVEE', 'PIKACHU', 'KIRLIA']],
+    ['i-gift', '선물·알·NPC 교환·게임코너 경품', gifts.length + '마리', gifts.slice(0, 3).map(([p]) => p.key)],
+    ['i-once', '전설의 포켓몬 등 필드에 서 있는 포켓몬', once.length + '마리', ['MEWTWO', 'LUGIA', 'HO_OH']],
+    ['i-tm', '기술머신 번호·기술·얻는 곳', machines.length + '개', [],
+      machines.slice(0, 3).map(i => M[i.teaches] ? `<span class="chip">${typeChip(M[i.teaches].type)} ${esc(M[i.teaches].ko)}</span>` : '').join('')],
+    ['i-mart', '상점마다 파는 물건', marts.size + '곳', [],
+      ['POKE_BALL', 'POTION', 'FIRE_STONE'].filter(k => I[k]).map(k => `<span class="chip">${esc(I[k].ko)}</span>`).join('')],
+    ['i-center', '색 바꾸기 · 이름 바꾸기 · 탈의실', '3가지', [],
+      `<span class="swatches">${['#e04040', '#3a6fd8', '#3fa34d', '#8a5a2b', '#e8c52a', '#f08cc0', '#8e4fc4', '#f08a2a', '#b8bcc8', '#2a2a2a', '#d4a72c'].map(c => `<i style="background:${c}"></i>`).join('')}</span>`],
+    ['i-role', '도시별 롤플레잉 주제와 상품', '5개 도시', [],
+      ['FOCUS_SASH', 'EVIOLITE', 'ASSAULT_VEST', 'CHOICE_BAND', 'LEFTOVERS'].filter(k => I[k]).map(k => `<span class="chip">${esc(I[k].ko)}</span>`).join('')],
+  ];
+  const _build = `
+  ${sec('i-trade', '통신교환 진화', '공식 게임에서 통신교환으로 진화하던 포켓몬은 교환 없이 진화합니다.<br>대부분 레벨 40입니다.',
+    `<div class="tbl-wrap"><table><thead><tr><th>포켓몬</th><th>진화</th><th>암브로시아에서는</th></tr></thead><tbody>
+    ${trade.flatMap(p => p.evolutions.map(e => evoRow(p, e))).join('')}</tbody></table></div>`)}
+  ${sec('i-evo', '도구·친밀도 진화', '돌·친밀도처럼 레벨이 아닌 방법으로 진화합니다.<br>친밀도 진화는 시간대와 상관없습니다.',
+    `<div class="tbl-wrap"><table><thead><tr><th>포켓몬</th><th>진화</th><th>방법</th></tr></thead><tbody>
+    ${special.map(([p, e]) => evoRow(p, e)).join('')}</tbody></table></div>
+    <h3 style="margin-top:16px">진화의 돌 얻는 곳</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>도구</th><th>얻는 곳</th></tr></thead><tbody>
+    ${stones.map(k => `<tr><td><b>${itemLink(k)}</b></td><td class="wrapc">${whereCell(I[k], 99)}</td></tr>`).join('')}</tbody></table></div>`)}
+  ${sec('i-gift', '선물·교환·경품', '야생에서 잡지 않고 얻는 포켓몬입니다.<br>교환은 「내가 줄 포켓몬」을 데려가야 합니다.',
+    `<div class="tbl-wrap"><table><thead><tr><th>포켓몬</th><th>방법</th><th>장소</th><th>레벨</th><th>내용</th></tr></thead><tbody>
+    ${gifts.map(([p, l]) => `<tr><td>${monLink(p.key)}</td><td><span class="tag">${esc(l.method)}</span></td><td>${placeLink(l.map, l.map_ko)}</td><td>${lvRange(l)}</td>
+      <td class="wrapc">${l.trade_for ? `내가 줄 포켓몬: ${monLink(l.trade_for, .5)}` + (l.nickname ? ` · 이름 「${esc(l.nickname)}」` : '') + '<br>' : ''}${l.note && !l.trade_for ? esc(l.note) + '<br>' : ''}${l.held_item ? `지닌 도구: ${itemLink(l.held_item)}` : ''}</td></tr>`).join('')}
+    </tbody></table></div>`)}
+  ${sec('i-once', '한 번만 만나는 포켓몬', '전설의 포켓몬처럼 필드에 서 있는 포켓몬입니다.<br>레벨이 범위로 적혀 있으면 진행할수록 오릅니다.<br>쓰러뜨리면 다시 만날 수 없으니 리포트를 쓰고 싸우세요.',
+    `<div class="tbl-wrap"><table><thead><tr><th>포켓몬</th><th>장소</th><th>레벨</th><th>메모</th></tr></thead><tbody>
+    ${once.map(([p, l]) => `<tr><td>${monLink(p.key)}</td><td>${placeLink(l.map, l.map_ko)}</td><td>${lvRange(l)}</td><td class="wrapc">${l.method.includes('이로치') ? '<span class="tag gold">이로치</span> ' : ''}${esc((l.note || '').replace('단 한 번만 만날 수 있다.', '').replace('진행도에 따라 레벨이 달라진다.', '').replace('이로치.', '').trim())}</td></tr>`).join('')}
+    </tbody></table></div>`)}
+  ${sec('i-tm', '기술머신', '기술머신은 몇 번이든 쓸 수 있습니다.<br><b>주움</b> 바닥의 볼 · <b>숨김</b> 숨겨진 도구<br><b>받음</b> 사람에게 받음 · <b>구입</b> 상점<br><b>전화</b> 번호를 등록한 트레이너가 가끔 줌<br><b>2회차</b> 뉴 게임 플러스에서만 파는 상점',
+    `<div class="tbl-wrap"><table><thead><tr><th>번호</th><th>기술</th><th>얻는 곳</th><th>타입</th><th>분류</th><th class="num">위력</th><th class="num">명중</th></tr></thead><tbody>
+    ${machines.map(i => { const m = M[i.teaches] || {}; return `<tr><td class="px">${esc(i.ko.replace('기술머신', '').replace('비전머신', '비전'))}</td><td><b>${moveLink(i.teaches)}</b></td><td class="wrapc" style="min-width:170px">${whereCell(i, 2)}</td>
+      <td>${m.type ? typeChip(m.type) : ''}</td><td>${m.category ? catChip(m.category) : ''}</td><td class="num">${dash(m.power)}</td><td class="num">${dash(m.accuracy)}</td></tr>`; }).join('')}
+    </tbody></table></div>`)}
+  ${sec('i-mart', '상점', '상점마다 파는 물건입니다. 이야기를 진행하면 바뀌는 곳(무궁·황토)은 조건을 적었습니다.<br>2회차(뉴 게임 플러스)에서는 몇몇 프렌들리숍의 물건이 통째로 바뀝니다. 그 상점은 맨 아래에 모았습니다.',
+    `<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">${[...marts.values()].map(({ w, note, set }) => `<div class="card pad" style="box-shadow:none">
+      <h3>${esc(w)}</h3>${note ? `<div class="small muted" style="margin:-4px 0 8px">${esc(note)}</div>` : ''}<div style="display:flex;flex-wrap:wrap;gap:4px">${[...set].filter(k => I[k]).map(k => `<a class="chip" href="#/items?q=${encodeURIComponent(I[k].ko)}">${esc(I[k].ko)}</a>`).join('')}</div></div>`).join('')}</div>`)}
+  ${sec('i-center', '포켓몬센터 2층', '모든 포켓몬센터 2층에 있습니다. 도라지시티에서 이수재가 처음 소개해 주지만, 처음부터 쓸 수 있습니다.',
+    `<div class="tbl-wrap"><table><thead><tr><th>장치</th><th>할 수 있는 것</th></tr></thead><tbody>
+      <tr><td><b>색 바꾸기 장치</b><div class="muted small">왼쪽 위 기계</div></td><td class="wrapc">파티 포켓몬 한 마리를 골라 <b>색 1(밝은 쪽)</b>과 <b>색 2(어두운 쪽)</b>을 정합니다. 빨강·파랑·초록·갈색·노랑·분홍·보라·주황·은색·검정·금색 11가지라 조합은 121가지이고, 「기본」을 고르면 원래 색으로 돌아갑니다. 보이는 색만 바뀌고 능력치·이로치 여부는 그대로입니다. 박스에 맡겨도 유지되고, 알은 바꿀 수 없습니다.</td></tr>
+      <tr><td><b>이름 바꾸기</b><div class="muted small">색을 고른 뒤 이어서</div></td><td class="wrapc">색을 정하고 나면 이름도 바꿀지 묻습니다. 금빛시티 성명판단소와 달리 <b>교환한 포켓몬도</b> 바꿀 수 있습니다.</td></tr>
+      <tr><td><b>탈의실</b><div class="muted small">위쪽 벽</div></td><td class="wrapc">주인공의 모습을 다시 고릅니다.</td></tr>
+    </tbody></table></div>`)}
+  ${sec('i-role', '롤플레잉 상품', '시작하기 전에 리포트를 써야 합니다. 영웅 편과 악당 편 중 하나를 고르고, 정해진 포켓몬으로 싸웁니다(내 포켓몬은 쓰지 않음).<br>상품은 도시마다 처음 끝냈을 때 한 번만 주고, 영웅·악당 어느 쪽이든 같습니다. 끝난 뒤에도 다시 할 수 있고 보너스 라운드가 있습니다.',
+    `<div class="tbl-wrap"><table><thead><tr><th>도시</th><th>주제</th><th>상품</th></tr></thead><tbody>
+      ${[['CHERRYGROVE_CITY', '무궁시티', '스타워즈', 'FOCUS_SASH'], ['AZALEA_TOWN', '고동마을', '유희왕', 'EVIOLITE'], ['OLIVINE_CITY', '담청시티', '드래곤볼 Z', 'ASSAULT_VEST'],
+         ['BLACKTHORN_CITY', '검은먹시티', '반지의 제왕', 'CHOICE_BAND'], ['LAVENDER_TOWN', '보라타운', '멀린', 'LEFTOVERS']].map(([k, n, t, it]) =>
+        `<tr><td>${placeLink(k, n)}</td><td>${t}</td><td><b>${itemLink(it)}</b><div class="muted small">${esc(I[it]?.desc || '')}</div></td></tr>`).join('')}
+    </tbody></table></div>`)}`;
+  const one = parts[arg];
+  if (one) {
+    setTitle(one.title + ' · 자료실');
+    return `${crumb()}<h1>${one.title}${one.lead ? itip(one.lead) : ''}</h1>
+    <div class="toc">${CARDS.map(([id]) => `<a href="#/info/${id}"${id === arg ? ' class="on"' : ''}>${parts[id].title}</a>`).join('')}</div>
+    <section class="card pad" style="margin-top:14px">${one.body}</section>`;
+  }
+  setTitle('자료실');
+  const c = D.meta.counts;
+  const LISTS = [['#/moves', '기술', `${c.moves}개`, '타입·위력·명중, 배우는 포켓몬'], ['#/items', '도구', `${c.items}개`, '효과와 얻는 곳·파는 곳'],
+    ['#/trainers', '트레이너', `${c.trainers}명`, '관장·사천왕·보스의 팀과 기술'], ['#/types', '타입 상성표', `${D.types.length}타입`, '공격 타입별 효과, 우버 타입 포함']];
+  return `<h1>자료실${itip('게임하다 찾아보는 목록과 표를 모았습니다.<br>목록은 검색해서 찾고, 표는 한 주제를 한눈에 봅니다.')}</h1>
+  <h2>목록</h2>
+  <div class="icards">${LISTS.map(([href, title, count, blurb]) => `<a class="card icard" href="${href}">
+    <div class="icard-top"><b>${title}</b><span class="tag gold">${count}</span></div>
+    <div class="muted small">${blurb}</div></a>`).join('')}</div>
+  <h2>표</h2>
+  <div class="icards">${CARDS.map(([id, blurb, count, mons, extra]) => `<a class="card icard" href="#/info/${id}">
+    <div class="icard-top"><b>${parts[id].title}</b><span class="tag gold">${count}</span></div>
+    <div class="muted small">${blurb}</div>
+    ${mons.filter(k => P[k]).length ? `<div class="icard-mons">${mons.filter(k => P[k]).map(k => spr(k, .7)).join('')}</div>` : ''}
+    ${extra ? `<div class="icard-extra">${extra}</div>` : ''}
+  </a>`).join('')}</div>
+  <h2>데이터에 관한 메모</h2>
+  <div class="card pad"><ul class="notes">${D.meta.notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul></div>`;
+}
+function notFound() { setTitle('없는 페이지'); return `<div class="empty"><h2>찾는 페이지가 없습니다</h2><a href="#/">처음으로</a></div>`; }
+
+// ---------- (i) explanations ----------
+const itip = text => `<span class="itip"><button class="itip-btn" type="button" aria-label="설명 보기" aria-expanded="false">i</button><span class="itip-pop" role="tooltip">${text}</span></span>`;
+{
+  const close = except => document.querySelectorAll('.itip.open').forEach(w => { if (w !== except) { w.classList.remove('open'); w.firstChild.setAttribute('aria-expanded', 'false'); } });
+  const open = w => {
+    close(w);
+    w.classList.add('open'); w.firstChild.setAttribute('aria-expanded', 'true');
+    const pop = w.querySelector('.itip-pop'), r = w.firstChild.getBoundingClientRect();
+    const pw = pop.offsetWidth, ph = pop.offsetHeight;
+    const x = Math.max(8, Math.min(r.left + r.width / 2 - pw / 2, innerWidth - pw - 8));
+    let y = r.bottom + 8;
+    if (y + ph > innerHeight - 8) y = Math.max(8, r.top - ph - 8);
+    pop.style.left = x + 'px'; pop.style.top = y + 'px';
+  };
+  document.addEventListener('click', e => {
+    const w = e.target.closest('.itip');
+    if (w && e.target.closest('.itip-btn')) { e.preventDefault(); w.classList.contains('open') ? close() : open(w); return; }
+    if (!w) close();
+  });
+  if (matchMedia('(hover: hover)').matches) {
+    document.addEventListener('mouseover', e => { const w = e.target.closest('.itip'); if (w && !w.classList.contains('open')) open(w); });
+    document.addEventListener('mouseout', e => { const w = e.target.closest('.itip'); if (w && !w.contains(e.relatedTarget)) close(); });
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  window.addEventListener('scroll', () => close(), { passive: true });
+  window.addEventListener('hashchange', () => close());
+}
+
+// ---------- hover cards ----------
+// Pokémon: types, stats against the official games, ability, moves the
+// official games do not teach. Items: effect, price, where to get them.
+function tipPokemon(k) {
+  const p = P[k], c = CMP[k] || {};
+  const st = STATS6.map(([s, l]) => { const d = c.stats ? p.stats[s] - c.stats[s] : 0; return `<div class="${d > 0 ? 'up' : d < 0 ? 'dn' : ''}"><span class="muted">${l}</span><b>${p.stats[s]}</b><i>${c.stats ? (d ? (d > 0 ? '+' : '') + d : '=') : ''}</i></div>`; }).join('');
+  const moves = [...(c.custom_moves || []).map(m => ['own', m]), ...(c.new_level_moves || []).map(m => ['new', m]), ...(c.new_tm_moves || []).map(m => ['new', m])].filter(([, m]) => M[m]);
+  const types = c.type_changed ? `<span class="strike">${c.types.map(t => typeChip(t)).join(' ')}</span> → ${p.types.map(t => typeChip(t)).join(' ')}` : p.types.map(t => typeChip(t)).join(' ');
+  return `<div class="tip-h">${spr(k, .9)}<div><b>${esc(p.ko)}</b> <span class="muted small">#${no3(p.dex_order)}</span><div style="margin-top:2px">${types}</div></div></div>
+    <div class="st6">${st}</div>
+    <div class="tip-l">특성</div><div>${esc(p.dex_page2)}</div>
+    ${moves.length ? `<div class="tip-l">공식 게임과 달리 배우는 기술 ${moves.length}개</div><div class="chips">${moves.slice(0, 12).map(([cls, m]) => `<span class="chip ${cls}">${esc(M[m].ko)}</span>`).join('')}${moves.length > 12 ? `<span class="muted small">외 ${moves.length - 12}개</span>` : ''}</div>` : ''}`;
+}
+function tipItem(k) {
+  const i = I[k], w = wherePieces(i);
+  return `<div class="tip-h"><b>${esc(i.ko)}</b><span class="tag">${esc(i.pocket)}</span>${i.price ? `<span class="muted small">₩${i.price.toLocaleString()}</span>` : ''}</div>
+    <div>${esc(i.desc)}</div>
+    ${w.length ? `<div class="tip-l">얻는 곳</div><div>${w.slice(0, 4).join('<br>')}${w.length > 4 ? `<br><span class="muted">그 밖에 ${w.length - 4}곳</span>` : ''}</div>` : ''}`;
+}
+// Mouse: the card follows the pointer. Touch: the first tap on a Pokémon or
+// item shows its card, a second tap on it opens its page, a tap elsewhere
+// closes the card.
+{
+  const tip = document.createElement('div');
+  tip.className = 'tip';
+  document.body.appendChild(tip);
+  const touch = !matchMedia('(hover: hover)').matches;
+  let cur = null;
+  const hide = () => { cur = null; tip.classList.remove('on'); };
+  const show = el => {
+    const [kind, key] = el.dataset.tip.split(':');
+    const html = kind === 'p' && P[key] ? tipPokemon(key) : kind === 'i' && I[key] ? tipItem(key) : '';
+    if (!html) return false;
+    cur = el;
+    tip.innerHTML = html + (touch && el.closest('a[href]') ? '<div class="tip-l" style="margin-top:8px">한 번 더 누르면 페이지로 이동합니다</div>' : '');
+    tip.classList.add('on');
+    const r = el.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight;
+    const x = Math.min(Math.max(8, r.left), innerWidth - tw - 8);
+    let y = r.bottom + 6;
+    if (y + th > innerHeight - 8) y = Math.max(8, r.top - th - 6);
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+    return true;
+  };
+  if (touch) {
+    document.addEventListener('click', e => {
+      const el = e.target.closest('[data-tip]');
+      if (!el) { if (cur) hide(); return; }
+      if (el === cur) { hide(); return; } // second tap: let the link open
+      if (show(el)) e.preventDefault();
+    }, true);
+  } else {
+    document.addEventListener('mouseover', e => {
+      const el = e.target.closest('[data-tip]');
+      if (!el) { if (cur) hide(); return; }
+      if (el !== cur && !show(el)) hide();
+    });
+  }
+  window.addEventListener('scroll', () => { if (cur) hide(); }, { passive: true });
+  window.addEventListener('hashchange', hide);
+}
+
+// ---------- router ----------
+// pages that live under another tab of the top menu
+const TAB_OF = { p: 'dex', place: 'places', guide: 'changes', moves: 'info', move: 'info', items: 'info', item: 'info', trainers: 'info', trainer: 'info', types: 'info' };
+function render() {
+  const h = location.hash.replace(/^#\/?/, '');
+  const [pathPart, query] = h.split('?');
+  const [r, arg] = pathPart.split('/').map(decodeURIComponent);
+  const params = Object.fromEntries(new URLSearchParams(query || ''));
+  document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.dataset.r === (TAB_OF[r] || r)));
+  const navEl = $('#nav'), onTab = $('#nav a.on');  // keep the current tab in view on phones
+  if (onTab && navEl.scrollWidth > navEl.clientWidth) navEl.scrollLeft = onTab.offsetLeft - (navEl.clientWidth - onTab.offsetWidth) / 2;
+  setHeadH();
+  const views = {
+    '': [viewHome, bindHome], start: [viewStart, bindStart], walk: [viewWalk, bindWalk], train: [viewTrain, bindStart], changes: [viewChanges, bindChanges], dex: [() => viewDex(params), bindDex], p: [() => viewMon(arg), () => bindMon(arg)],
+    moves: [viewMoves, bindMoves], move: [() => viewMove(arg), () => {}], items: [() => viewItems(params), bindItems],
+    trainers: [viewTrainers, bindTrainers], trainer: [() => viewTrainer(arg), () => {}], places: [viewPlaces, bindPlaces],
+    place: [() => viewPlace(arg), bindRows], types: [viewTypes, () => {}], guide: [viewChanges, bindChanges],
+    info: [() => viewInfo(arg), () => {}],
+  };
+  const v = views[r] || [notFound, () => {}];
+  app.innerHTML = v[0]();
+  if (r !== 'p' || P[arg]) v[1]();
+}
+// The wiki keeps its own page history: inside the artifact frame (and in the
+// phone app) there is no browser back button. Each entry remembers where the
+// page was scrolled, so going back lands where the reader left off.
+let lastHash = '';
+const trail = [];           // [{hash, y}] pages before this one
+let skipTrail = false;
+const home = h => !h || h === '#' || h === '#/';
+const same = (a, b) => (home(a) && home(b)) || a === b;
+const backBtn = $('#back');
+const syncBack = () => { backBtn.hidden = home(location.hash); };
+const PARENT = { p: '#/dex', move: '#/moves', trainer: '#/trainers', place: '#/places', moves: '#/info', items: '#/info', trainers: '#/info', types: '#/info', guide: '#/changes' };
+backBtn.onclick = () => {
+  if (trail.length) { location.hash = trail[trail.length - 1].hash || '#/'; return; }
+  const r = location.hash.replace(/^#\/?/, '').split(/[/?]/)[0];
+  skipTrail = true;
+  location.hash = location.hash.startsWith('#/info/') ? '#/info' : (PARENT[r] || '#/');
+};
+window.addEventListener('hashchange', () => {
+  const base = h => h.split('?')[0];
+  let y = null;
+  if (trail.length && same(location.hash, trail[trail.length - 1].hash)) {
+    y = trail.pop().y;                       // back: our button or the browser's
+  } else if (!skipTrail && !same(location.hash, lastHash)) {
+    trail.push({ hash: lastHash, y: window.scrollY });
+    if (trail.length > 60) trail.shift();
+  }
+  skipTrail = false;
+  const sameList = base(location.hash) === base(lastHash) && !location.hash.includes('/p/');
+  lastHash = location.hash;
+  render();
+  syncBack();
+  if (y != null) window.scrollTo(0, y);      // render() is synchronous, so the page is laid out
+  else if (!sameList) window.scrollTo(0, 0);
+});
+
+Promise.all(['data.json', 'sprites.json', 'guide.json', 'avail.json', 'compare.json', 'walkthrough.json', 'walk_mons.json'].map(f => fetch(f + '?v=22').then(r => r.ok ? r.json() : null))).then(([d, s, g, av, cmp, w, wm]) => {
+  D = d; SP = s; G = g; AV = av; CMP = cmp.pokemon; CMV = cmp.moves || {}; W = w; WM = wm || {};
+  D.pokemon.forEach(p => P[p.key] = p);
+  D.moves.forEach(m => M[m.key] = m);
+  D.items.forEach(i => I[i.key] = i);
+  D.trainers.forEach(t => T[t.key] = t);
+  D.types.forEach(t => TY[t.id] = t);
+  D.type_chart.forEach(([a, b, m]) => (EFF[a] ||= {})[b] = m);
+  for (const r of Object.keys(D.places)) for (const p of D.places[r]) { PL[p.key] = p; PLACE_LIST.push(p); }
+  for (const p of D.pokemon) {
+    for (const [l, k] of p.level_moves) { const L = (LEARN[k] ||= { lv: [], tm: [] }); if (!L.lv.some(x => x[0] === p.key)) L.lv.push([p.key, l <= 1 ? '기본' : 'Lv.' + l]); }
+    for (const t of p.tm_moves) { const L = (LEARN[t.move] ||= { lv: [], tm: [] }); L.tm.push([p.key, '']); }
+  }
+  const ord = (a, b) => P[a[0]].dex_order - P[b[0]].dex_order;
+  for (const k in LEARN) { LEARN[k].lv.sort(ord); LEARN[k].tm.sort(ord); }
+  lastHash = location.hash;
+  render();
+  syncBack();
+}).catch(e => { app.innerHTML = `<div class="empty">데이터를 불러오지 못했습니다. (${esc(e.message)})</div>`; });
+})();
+</script>
+</body>
+</html>
+</body></html>
